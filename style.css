@@ -1,0 +1,59 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 1360px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header__navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.album {
+  display: inline-block;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.player {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px;
+}
+
+.progress-bar {
+  width: 400px;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+  margin: 20px;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background-color: blue;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
