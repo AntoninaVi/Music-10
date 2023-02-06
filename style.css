@@ -6,10 +6,31 @@
 }
 
 .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   max-width: 1360px;
   width: 100%;
+  margin-top: 1.5em;
   margin-left: auto;
   margin-right: auto;
+}
+
+.albums-container {
+  background: #ffffff;
+  border-radius: 22px;
+  -ms-flex-preferred-size: 75%;
+      flex-basis: 75%;
+}
+.albums-container-container-albums {
+  display: -ms-grid;
+  display: grid;
 }
 
 .header__navigation {

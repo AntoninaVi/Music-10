@@ -3,7 +3,7 @@ const albums = [
     title: "Aaron",
     songs: [
       {
-        title: "Song 1",
+        title: "Aaron",
         src:"./Aaron.mp3" 
       }
     ]
@@ -12,7 +12,7 @@ const albums = [
     title: "Altes",
     songs: [
       {
-        title: "Song 2",
+        title: "Altes%)",
         src: "./AltesKamuffel.mp3"
       }
     ]
