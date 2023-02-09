@@ -108,65 +108,6 @@ searchButton.addEventListener("click", () => {
 
 
 
-// ПОДХОДИТ НО НАДО ПЕРЕПИСАТЬ
-// function displayPlaylist(albums) {
-//   const playlist = document.createElement("div");
-//   for (const album of albums) {
-//     const albumName = document.createElement("h2");
-//     albumName.innerText = album.albumName;
-//     playlist.appendChild(albumName);
-
-//     const songsList = document.createElement("ul");
-//     for (const song of album.songs) {
-//       const songItem = document.createElement("li");
-//       songItem.innerText = `${song.title}`;
-//       songsList.appendChild(songItem);
-//     }
-//     playlist.appendChild(songsList);
-//   }
-//   return playlist;
-// }
-// document.body.appendChild(displayPlaylist(albums));
-// playlist
-
-// function displayPlaylist(album) {
-//   const playlist = document.getElementById("playlist");
-//   playlist.style.display = "none";
-//   const albumName = document.getElementsByClassName("album-title__artist");
-//   albumName.innerText = album.albumName;
-//   playlist.appendChild(albumName);
-
-//   const songsList = document.createElement("ul");
-//   for (const song of album.songs) {
-//     const songItem = document.createElement("li");
-//     songItem.innerText = `${song.title} (${song.duration})`;
-//     songsList.appendChild(songItem);
-//   }
-//   playlist.appendChild(songsList);
-//   return playlist;
-// }
-
-
-// function togglePlaylist(event) {
-//   const playlist = event.target.nextElementSibling;
-//   if (playlist.style.display === "none") {
-//     playlist.style.display = "block";
-//   } else {
-//     playlist.style.display = "none";
-//   }
-// }
-
-
-// for (const album of albums) {
-//   const albumTitle =  document.getElementsByClassName("album-title");
-//   albumTitle.innerText = album.albumName;
-//   album.addEventListener("click", togglePlaylist);
-//   main.appendChild(albumTitle);
-//   main.appendChild(displayPlaylist(album));
-// }
-
-// document.body.appendChild(albums);
-
 
 function displayPlaylist(album) {
   const playlist = document.createElement("div");
@@ -224,7 +165,10 @@ function displayPlaylist(index) {
   const playlist = document.getElementById(`playlist-${index}`);
   playlist.style.display = 'block';
 }
-
+function playSong(src) {
+  document.getElementById('music-player').src = src;
+  document.getElementById('music-player').play();
+}
 albums.forEach((album, index) => {
   const playlist = document.createElement('div');
   playlist.classList.add('playlist');
@@ -232,8 +176,10 @@ albums.forEach((album, index) => {
   playlist.innerHTML = `
     <h3>${album.title}</h3>
     <ul>
-      ${album.songs.map(song => `<li>${JSON.stringify(song.title)}</li>`).join('')}
-    </ul>
+    ${album.songs.map(song => `<li><a href="#" onclick="playSong('${song.src}')">${song.src}</a></li>`).join('')}
+      </ul>
   `;
+  
   document.getElementById('playlist').appendChild(playlist);
 });
+
