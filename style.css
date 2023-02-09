@@ -5,6 +5,14 @@
   margin: 0;
 }
 
+@font-face {
+  font-family: "PT Root UI Web";
+  src: url(fonts/pt-root-ui_medium.woff);
+}
+body {
+  font-family: "PT Root UI Web", sans-serif;
+}
+
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -77,4 +85,55 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+
+.player-container {
+  background-image: url(img/blur-bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+#song-title {
+  color: red;
+}
+
+#playlist {
+  background: red;
+  height: 3em;
+}
+
+.album-cover {
+  width: 192px;
+  height: 192;
+  border-radius: 12px;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  color: #3a3a3a;
+}
+
+.album-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #3a3a3a;
+}
+
+.album-title__artist {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #3a3a3a;
+  opacity: 0.6;
+}
+
+#music-player {
+  margin-top: 5em;
 }

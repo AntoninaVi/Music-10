@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/wavesurfer.js"></script>
+
+    <!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
+
 </head>
 
 <body>
@@ -17,7 +21,7 @@
                     <nav class="header__navigation">
                         <div class="header__navigation-logo"><img src="img/logo.svg" alt="logotype"></div>
                         <div class="header__navigation-search" id="search">
-                            <input type="text" id="search-input">
+                            <input type="text" id="search-input" placeholder="Search">
                             <button id="search-button">Search</button>
                         </div>
                     </nav>
@@ -26,40 +30,50 @@
 
 
                 <div class="albums-container-albums" id="albums">
-                    <div class="album" id="album1">
-                        Aaron
-                    </div>
-                    <div class="album" id="album2">
-                        Altes
-                    </div>
+                    <h1 class="albums-title">Original Soundtrack</h1>
+                    <ul id="albumList">
+                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <h2 class="album-title"> Aaron</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/altes.png" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Altes</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                    </ul>
+
                 </div>
             </section>
 
             <section class="player-container">
                 <div id="player">
+
                     <div id="song-title">
                         Song Title
                     </div>
-                    <div id="waveform">
-                        <audio id="music-player" controls></audio>
-                        <div id="progress-bar">
-                            <div id="progress"></div>
-                        </div>
+
+                    <audio id="music-player" controls>
+
+                    </audio>
+                    <div id="progress-bar">
+                        <div id="progress"></div>
                     </div>
+                    <div  id="playlist"></div>
+
                 </div>
             </section>
+
         </div>
     </div>
 
-    <script src="index.js"></script>
-</body>
-<script>
 
-    // var wavesurfer = WaveSurfer.create({
-    //     container: document.querySelector('#waveform'),
-    //     backend: 'MediaElement'
-    // });
-    // wavesurfer.load('./Aaron.mp3');
-</script>
+
+    <!-- <script type="module" src="firebase.js"></script> -->
+  
+
+    <script  src="index.js" ></script>
+</body>
 
 </html>
