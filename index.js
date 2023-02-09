@@ -79,13 +79,6 @@ albumElements.forEach((albumElement, index) => {
     player.src = currentAlbum.songs[0].src;
     player.play();
 
-    // playlist.innerHTML += `<li class"song-artist">${albums.title}</li>
-    // `
-
-    //   albums.map(album =>
-    //     { return albums.songTitle
-    // })
-    //  console.log(playlist.innerHTML = `<li>${album.songs }</li>`)  
   });
 
 });
@@ -175,11 +168,10 @@ albums.forEach((album, index) => {
   playlist.id = `playlist-${index}`;
   playlist.innerHTML = `
     <h3>${album.title}</h3>
-    <ul>
-    ${album.songs.map(song => `<li><a href="#" onclick="playSong('${song.src}')">${song.src}</a></li>`).join('')}
-      </ul>
+    <ol class="ol-playlist">
+    ${album.songs.map(song => `<li><a class="playsong" href="#" onclick="playSong('${song.src}')">${song.title}</a></li>`).join('')}
+      </ol>
   `;
   
   document.getElementById('playlist').appendChild(playlist);
 });
-

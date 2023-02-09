@@ -12,6 +12,11 @@
 body {
   font-family: "PT Root UI Web", sans-serif;
 }
+@media screen and (min-width: 1300px) {
+  body {
+    overflow: hidden;
+  }
+}
 
 .container {
   display: -webkit-box;
@@ -35,12 +40,17 @@ body {
   border-radius: 22px;
   -ms-flex-preferred-size: 75%;
       flex-basis: 75%;
+  max-width: 60rem;
+  width: 100%;
 }
 .albums-container-container-albums {
   display: -ms-grid;
   display: grid;
 }
 
+.header {
+  margin-bottom: 2em;
+}
 .header__navigation {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,9 +59,24 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.header__navigation-search {
+  max-width: 19.5em;
+  width: 100%;
+}
+
+#albumList {
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  -ms-grid-rows: 1fr 3em 1fr;
+  grid-template-rows: 1fr 1fr;
+  -webkit-column-gap: 2em;
+     -moz-column-gap: 2em;
+          column-gap: 2em;
+  row-gap: 3em;
+}
+
 .album {
-  display: inline-block;
-  margin: 20px;
   cursor: pointer;
 }
 
@@ -92,16 +117,18 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  -ms-flex-preferred-size: 30%;
+      flex-basis: 30%;
+  padding-top: 1.5em;
 }
 
 #song-title {
-  color: red;
-}
-
-#playlist {
-  background: red;
-  height: 3em;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  color: #ffffff;
+  text-align: left;
 }
 
 .album-cover {
@@ -136,4 +163,75 @@ h1 {
 
 #music-player {
   margin-top: 5em;
+}
+
+.playsong {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  padding: 10px 24px;
+}
+
+.playsong:hover {
+  background-image: url(img/plau.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-color: #ffffff;
+  color: #3a3a3a;
+  border-radius: 6px;
+}
+
+.playsong:focus {
+  background-image: url(img/Equalizer.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+input {
+  padding: 0.5em 0em 0.5em 2.5em;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 200px;
+  max-width: 17em;
+  width: 100%;
+}
+
+#search-button {
+  position: relative;
+  right: 16.5em;
+  background-color: transparent;
+  border: none;
+  vertical-align: middle;
+}
+
+.profile {
+  vertical-align: middle;
+}
+
+.ol-playlist {
+  margin-left: 2em;
+}
+
+.playsong {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+ol li::marker {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #d0cece;
+  opacity: 0.4;
+}
+
+ol li {
+  height: 2.5em;
+  width: 100%;
 }

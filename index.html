@@ -7,7 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
+
     <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
 
@@ -22,7 +24,8 @@
                         <div class="header__navigation-logo"><img src="img/logo.svg" alt="logotype"></div>
                         <div class="header__navigation-search" id="search">
                             <input type="text" id="search-input" placeholder="Search">
-                            <button id="search-button">Search</button>
+                            <button id="search-button"><img src="img/Search.svg" alt="search"></button>
+                            <a href="#" class="profile"><img src="img/avatar.svg" alt="avatar" class="profile-img"></a>
                         </div>
                     </nav>
                 </header>
@@ -42,6 +45,56 @@
                             <h2 class="album-title"> Altes</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/icke.jpg" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Icke Wieder</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/icke.jpg" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Icke Wieder</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/icke.jpg" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Icke Wieder</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/altes.png" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Altes</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <h2 class="album-title"> Aaron</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <h2 class="album-title"> Aaron</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <h2 class="album-title"> Aaron</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <h2 class="album-title"> Aaron</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/icke.jpg" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Icke Wieder</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
+                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                            <img src="img/icke.jpg" alt="album-cover" class="album-cover">
+                            <h2 class="album-title"> Icke Wieder</h2>
+                            <h3 class="album-title__artist">Paul Kalkbrenner</h3>
+                        </div>
                     </ul>
 
                 </div>
@@ -53,16 +106,16 @@
                     <div id="song-title">
                         Song Title
                     </div>
-
+                    <div id="waveform"> </div>
                     <audio id="music-player" controls>
-
+                     
                     </audio>
                     <div id="progress-bar">
                         <div id="progress"></div>
                     </div>
                     <div  id="playlist"></div>
-
                 </div>
+               
             </section>
 
         </div>
@@ -75,5 +128,8 @@
 
     <script  src="index.js" ></script>
 </body>
+<script>
+
+</script>
 
 </html>
