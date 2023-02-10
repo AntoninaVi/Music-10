@@ -35,6 +35,8 @@ const albums = [
 ];
 
 
+
+
 // const albumsArr = [album1, album2];
 const albumElements = document.querySelectorAll(".album");
 const player = document.querySelector("#music-player");
@@ -45,7 +47,9 @@ const searchInput = document.querySelector("#search-input");
 const searchButton = document.querySelector("#search-button");
 // const playlist = document.querySelector('.player-container');
 
+
 let currentAlbum = albums[0];
+
 const displayAlbums = () => {
   albumList.innerHTML = "";
   for (const albumKey in albums) {
@@ -116,4 +120,9 @@ albums.forEach((album, index) => {
       </ol>`;
   document.getElementById('playlist').appendChild(playlist);
 });
+
+
+
+
+// wave
 

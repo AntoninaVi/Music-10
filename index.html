@@ -9,6 +9,7 @@
 
 
     <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js"></script>
 
     <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
@@ -110,10 +111,16 @@
                         <audio id="music-player" controls>
                         </audio>
                     </div>
+                    <div id="waveform-timeline"></div>
 
+                
+                  
+                    <div>Total time: <span id="time-total">0</span> milliseconds</div>
+                    <div>Current time: <span id="time-current">0</span> milliseconds</div>
+                    <div>Ramaining time: <span id="time-remaining">0</span> milliseconds</div>
                     <div class="control-bar">
-                        <button id="playbtn">play</button>
-                        <button id="stopbtn">stop</button>
+                        <button id="playbtn" onClick="wavesurfer.playPause()">play</button>
+                        <button id="stopbtn"onClick="wavesurfer.stop()">stop</button>
                     </div>
 
                     <!-- <div id="progress-bar">
@@ -145,10 +152,11 @@
         waveColor: '#FFCD06',
         progressColor: '#FFCD06',
         barHeight: 1,
-        audioRate: 6,
+        // audioRate: 6,
         autoCenter: true,
         barRadius: 30,
-        cursorColor: '#FFCD06'
+        cursorColor: '#FFCD06',
+      
 
     });
     wavesurfer.load('./Aaron.mp3');
@@ -160,6 +168,31 @@
         wavesurfer.stop();
     }
 
+
+    wavesurfer.on('ready', function () {
+  var timeline = Object.create(WaveSurfer.Timeline);
+
+  timeline.init({
+    wavesurfer: wavesurfer,
+    container: '#waveform-timeline',
+    primaryFontColor: '#fff',
+    primaryColor: '#fff',
+    secondaryColor: '#fff',
+    secondaryFontColor: '#fff'
+  });
+});
+
+wavesurfer.on('audioprocess', function() {
+  if (wavesurfer.isPlaying()) {
+    var totalTime = wavesurfer.getDuration(),
+        currentTime = wavesurfer.getCurrentTime(),
+        remainingTime = totalTime - currentTime;
+        
+    document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
+    document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
+    document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
+  }
+});
 
 </script>
 
