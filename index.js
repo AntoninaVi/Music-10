@@ -35,17 +35,6 @@ const albums = [
 ];
 
 
-
-
-
-// console.log("Album: " + albums.title);
-// console.log("Artist: " + albums.artist);
-// for (var i = 0; i < albums.songs.length; i++) {
-//   console.log((i + 1) + ". " + albums.songs[i].title + " - " + album.songs[i].length);
-// }
-
-
-
 // const albumsArr = [album1, album2];
 const albumElements = document.querySelectorAll(".album");
 const player = document.querySelector("#music-player");
@@ -56,9 +45,7 @@ const searchInput = document.querySelector("#search-input");
 const searchButton = document.querySelector("#search-button");
 // const playlist = document.querySelector('.player-container');
 
-
 let currentAlbum = albums[0];
-
 const displayAlbums = () => {
   albumList.innerHTML = "";
   for (const albumKey in albums) {
@@ -84,8 +71,15 @@ albumElements.forEach((albumElement, index) => {
 });
 
 player.addEventListener("timeupdate", () => {
-  progress.style.width = `${(player.currentTime / player.duration) * 100}%`;
+  waveform.style.width = `${(player.currentTime / player.duration) * 100}%`;
 });
+
+waveform.addEventListener("timeupdate", () => {
+  waveform.style.width = `${(waveform.currentTime / waveform.duration) * 100}%`;
+});
+
+
+
 
 searchButton.addEventListener("click", () => {
   const searchedAlbum = albums.find(album => album.title.toLowerCase().includes(searchInput.value.toLowerCase()));
@@ -97,59 +91,8 @@ searchButton.addEventListener("click", () => {
   }
 });
 
+// Playlist
 
-
-
-
-
-function displayPlaylist(album) {
-  const playlist = document.createElement("div");
-  playlist.style.display = "none";
-
-  const albumName = document.createElement("h2");
-  albumName.innerText = album.albumName;
-  playlist.appendChild(albumName);
-
-  const songsList = document.createElement("ul");
-  for (const song of album.songs) {
-    const songItem = document.createElement("li");
-    songItem.innerText = `${song.title} (${song.duration})`;
-    songsList.appendChild(songItem);
-    songItem.addEventListener("click", () => {
-      const audio = new Audio(song.url);
-      audio.play();
-    });
-  }
-  playlist.appendChild(songsList);
-  return playlist;
-}
-
-// function togglePlaylist(event) {
-//   const playlist = event.target.nextElementSibling;
-//   if (playlist.style.display === "none") {
-//     playlist.style.display = "block";
-//   } else {
-//     playlist.style.display = "none";
-//   }
-// }
-
-// const main = document.getElementById("playlist");
-// for (const album of albums) {
-//   const albumTitle = document.querySelectorAll("album-title");
-//   albumTitle.innerText = album.albumName;
-//   albumTitle.forEach((albumTitle) => albumTitle.addEventListener("click", togglePlaylist()));
-//   // document.body.appendChild(playlist);
-//   main.appendChild(displayPlaylist(playlist));
-
-// }
-
-
-// console.log("Album: " + album.title + " by " + album.artist);
-// console.log("Songs:");
-// for (var i = 0; i < album.songs.length; i++) {
-//   var song = album.songs[i];
-//   console.log("  " + (i + 1) + ". " + song.title + " (" + song.length + ")");
-// }
 
 function displayPlaylist(index) {
   document.querySelectorAll('.playlist').forEach(el => {
@@ -169,9 +112,8 @@ albums.forEach((album, index) => {
   playlist.innerHTML = `
     <h3>${album.title}</h3>
     <ol class="ol-playlist">
-    ${album.songs.map(song => `<li><a class="playsong" href="#" onclick="playSong('${song.src}')">${song.title}</a></li>`).join('')}
-      </ol>
-  `;
-  
+    ${album.songs.map(song => `<li class="playsong-li"><a class="playsong" href="#" onclick="playSong('${song.src}')">${song.title}</a> <a class="playsong-artist" href="#">${album.artist}</a></li>`)}
+      </ol>`;
   document.getElementById('playlist').appendChild(playlist);
 });
+

@@ -7,8 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
-    <script src="https://unpkg.com/wavesurfer.js"></script>
 
+    <script src="https://unpkg.com/wavesurfer.js"></script>
 
     <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
@@ -24,7 +24,7 @@
                         <div class="header__navigation-logo"><img src="img/logo.svg" alt="logotype"></div>
                         <div class="header__navigation-search" id="search">
                             <input type="text" id="search-input" placeholder="Search">
-                            <button id="search-button"><img src="img/Search.svg" alt="search"></button>
+                            <button type="submit" id="search-button"><img src="img/Search.svg" alt="search"></button>
                             <a href="#" class="profile"><img src="img/avatar.svg" alt="avatar" class="profile-img"></a>
                         </div>
                     </nav>
@@ -106,16 +106,22 @@
                     <div id="song-title">
                         Song Title
                     </div>
-                    <div id="waveform"> </div>
-                    <audio id="music-player" controls>
-                     
-                    </audio>
-                    <div id="progress-bar">
-                        <div id="progress"></div>
+                    <div id="waveform">
+                        <audio id="music-player" controls>
+                        </audio>
                     </div>
-                    <div  id="playlist"></div>
+
+                    <div class="control-bar">
+                        <button id="playbtn">play</button>
+                        <button id="stopbtn">stop</button>
+                    </div>
+
+                    <!-- <div id="progress-bar">
+                        <div id="progress"></div>
+                    </div> -->
+                    <div id="playlist"></div>
                 </div>
-               
+
             </section>
 
         </div>
@@ -124,11 +130,36 @@
 
 
     <!-- <script type="module" src="firebase.js"></script> -->
-  
 
-    <script  src="index.js" ></script>
+
+    <script src="index.js"></script>
+
 </body>
+
 <script>
+    const playBtn = document.getElementById('playbtn');
+    const stopBtn = document.getElementById('stopbtn');
+
+    var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: '#FFCD06',
+        progressColor: '#FFCD06',
+        barHeight: 1,
+        audioRate: 6,
+        autoCenter: true,
+        barRadius: 30,
+        cursorColor: '#FFCD06'
+
+    });
+    wavesurfer.load('./Aaron.mp3');
+
+    playBtn.onClick = function () {
+        wavesurfer.playPause();
+    }
+    stopBtn.onClick = function () {
+        wavesurfer.stop();
+    }
+
 
 </script>
 

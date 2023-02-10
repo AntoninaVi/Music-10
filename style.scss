@@ -10,7 +10,7 @@
 
 body {
     font-family: "PT Root UI Web", sans-serif;
-    @media screen and (min-width: 1300px) {
+    @media screen and (min-width: 1250px) {
         overflow: hidden;
     }
 }
@@ -25,6 +25,7 @@ body {
     margin-top: 1.5em;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 22px;
 }
 
 .albums-container {
@@ -56,7 +57,7 @@ body {
 }
 #albumList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(10.5em, 12em));
     grid-template-rows: 1fr 1fr;
     column-gap: 2em;
     row-gap: 3em;
@@ -94,9 +95,10 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 40vmax;
     flex-basis: 30%;
     padding-top: 1.5em;
+    border-radius: 0 22px 22px 0;
 }
 #song-title {
     font-weight: 500;
@@ -146,12 +148,7 @@ h1 {
     padding: 10px 24px;
 }
 .playsong:hover {
-    background-image: url(img/plau.svg);
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-color: #ffffff;
     color: #3a3a3a;
-    border-radius: 6px;
 }
 .playsong:focus {
     background-image: url(img/Equalizer.svg);
@@ -172,12 +169,14 @@ input {
     background-color: transparent;
     border: none;
     vertical-align: middle;
+    cursor: pointer;
 }
 .profile {
     vertical-align: middle;
 }
 .ol-playlist {
-    margin-left: 2em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
 }
 .playsong {
     font-style: normal;
@@ -195,7 +194,41 @@ ol li::marker {
     color: #d0cece;
     opacity: 0.4;
 }
-ol li{
+ol li {
     height: 2.5em;
     width: 100%;
+}
+
+.playsong-artist {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    opacity: 0.6;
+    text-decoration: none;
+}
+.playsong-li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    &:hover {
+        background-image: url(img/plau.svg);
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-color: #ffffff;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+}
+.playsong-li:hover .playsong {
+    color: #3a3a3a;
+}
+.playsong-li:hover .playsong-artist {
+    color: #3a3a3a;
+    opacity: 0.6;
+}
+audio{
+    background-color: red;
 }
