@@ -14,6 +14,12 @@
     <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
 
+    <!-- Firebase App -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js"></script> -->
+    <!-- Firebase Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js"></script> -->
+
+
 </head>
 
 <body>
@@ -37,7 +43,7 @@
                     <h1 class="albums-title">Original Soundtrack</h1>
                     <ul id="albumList">
                         <div onclick="displayPlaylist(0)" class="album" id="album1">
-                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" px class="album-cover">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover"  class="album-cover">
                             <h2 class="album-title"> Aaron</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
@@ -109,24 +115,25 @@
                     </div>
                     <div id="waveform">
                         <audio id="music-player" controls>
+
                         </audio>
                     </div>
                     <div id="waveform-timeline"></div>
 
-                
-                  
-                    <div>Total time: <span id="time-total">0</span> milliseconds</div>
+
+
+                    <!-- <div class="">Total time: <span id="time-total">0</span> milliseconds</div>
                     <div>Current time: <span id="time-current">0</span> milliseconds</div>
-                    <div>Ramaining time: <span id="time-remaining">0</span> milliseconds</div>
+                    <div>Ramaining time: <span id="time-remaining">0</span> milliseconds</div> -->
                     <div class="control-bar">
                         <button id="playbtn" onClick="wavesurfer.playPause()">play</button>
-                        <button id="stopbtn"onClick="wavesurfer.stop()">stop</button>
+                        <button id="stopbtn" onClick="wavesurfer.stop()">stop</button>
                     </div>
 
                     <!-- <div id="progress-bar">
                         <div id="progress"></div>
                     </div> -->
-                    <div id="playlist"></div>
+                    <div class="playlist" id="playList"></div>
                 </div>
 
             </section>
@@ -136,14 +143,17 @@
 
 
 
-    <!-- <script type="module" src="firebase.js"></script> -->
 
 
-    <script src="index.js"></script>
+    <script  src="index.js"></script>
+  
 
 </body>
 
+
 <script>
+
+
     const playBtn = document.getElementById('playbtn');
     const stopBtn = document.getElementById('stopbtn');
 
@@ -156,43 +166,35 @@
         autoCenter: true,
         barRadius: 30,
         cursorColor: '#FFCD06',
-      
-
     });
-    wavesurfer.load('./Aaron.mp3');
-
+    // wavesurfer.load(albumsRef);
     playBtn.onClick = function () {
         wavesurfer.playPause();
     }
     stopBtn.onClick = function () {
         wavesurfer.stop();
     }
-
-
     wavesurfer.on('ready', function () {
-  var timeline = Object.create(WaveSurfer.Timeline);
-
-  timeline.init({
-    wavesurfer: wavesurfer,
-    container: '#waveform-timeline',
-    primaryFontColor: '#fff',
-    primaryColor: '#fff',
-    secondaryColor: '#fff',
-    secondaryFontColor: '#fff'
-  });
-});
-
-wavesurfer.on('audioprocess', function() {
-  if (wavesurfer.isPlaying()) {
-    var totalTime = wavesurfer.getDuration(),
-        currentTime = wavesurfer.getCurrentTime(),
-        remainingTime = totalTime - currentTime;
-        
-    document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
-    document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
-    document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
-  }
-});
+        var timeline = Object.create(WaveSurfer.Timeline);
+        timeline.init({
+            wavesurfer: wavesurfer,
+            container: '#waveform-timeline',
+            primaryFontColor: '#fff',
+            primaryColor: '#fff',
+            secondaryColor: '#fff',
+            secondaryFontColor: '#fff'
+        });
+    });
+    wavesurfer.on('audioprocess', function () {
+        if (wavesurfer.isPlaying()) {
+            var totalTime = wavesurfer.getDuration(),
+                currentTime = wavesurfer.getCurrentTime(),
+                remainingTime = totalTime - currentTime;
+            document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
+            document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
+            document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
+        }
+    });
 
 </script>
 
