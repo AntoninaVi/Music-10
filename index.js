@@ -207,40 +207,22 @@ fetch('albums.json')
     });
   });
 
-const searchInput = document.getElementById("search-input");
-const searchButton = document.getElementById("search-button");
-searchButton.addEventListener("click", () => {
 
-  const searchedAlbum = albums.find(album => album.title.toLowerCase().includes(searchInput.value.toLowerCase()));
-  if (searchedAlbum) {
-    currentAlbum = searchedAlbum;
-    songTitle.innerHTML = currentAlbum.songs[0].title;
-    player.src = currentAlbum.songs[0].src;
-    player.play();
-  }
-});
 // Playlist
 function displayPlaylist(index) {
-  const playlists = document.querySelectorAll('.playlist');
-  for (let i = 0; i < playlists.length; i++) {
-    if (i === index) {
-      playlists[i].classList.add('active');
+  const playlist = document.getElementById('playlist');
+  for (let i = 0; i < playlist.length; i++) {
+    if (album === index) {
+      playlist[i].style.display = 'block';
     } else {
-      playlists[i].classList.remove('active');
+      playlist[i].style.display = 'none';
     }
   }
 }
 
 
 
-function playSong(title, src) {
-  const player = document.querySelector('#music-player');
-  const songTitle = document.querySelector('#song-title');
 
-  songTitle.innerHTML = title;
-  player.src = src;
-  player.play();
-};
 
 fetch('albums.json')
   .then(response => response.json())
@@ -255,8 +237,26 @@ fetch('albums.json')
     ${album.songs.map(song => `<li class="playsong-li"><a class="playsong" href="#" onclick="playSong('${song.title}', '${song.src}')">${song.title}</a>
     <a class="playsong-artist" href="#">${album.artist}</a></li>`)}
       </ol>`;
-      
+
       document.getElementById('playlist').appendChild(playlist);
+
+      const searchInput = document.getElementById("search-input");
+      const searchButton = document.getElementById("search-button");
+        const songTitle = document.querySelector("#song-title");
+        const player = document.querySelector("#music-player");
+      searchButton.addEventListener("click", () => {
+
+        const searchedAlbum = albums.find(album => album.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+        if (searchedAlbum) {
+          currentAlbum = searchedAlbum;
+          songTitle.innerHTML = currentAlbum.songs[0].title;
+          player.src = currentAlbum.songs[0].src;
+          player.play();
+
+          // Update playlist
+          displayPlaylist(albums.indexOf(searchedAlbum));
+        }
+      });
 
     }
     )
@@ -264,4 +264,11 @@ fetch('albums.json')
 
   });
 
- 
+function playSong(title, src) {
+  const player = document.querySelector('#music-player');
+  const songTitle = document.querySelector('#song-title');
+
+  songTitle.innerHTML = title;
+  player.src = src;
+  player.play();
+};
