@@ -12,36 +12,11 @@ fetch('albums.json')
     const progress = document.querySelector("#progress");
     const searchInput = document.querySelector("#search-input");
     const searchButton = document.querySelector("#search-button");
-    // const playlist = document.querySelector('.player-container');
-
+    const playlist = document.getElementById('playlist');
 
     let currentAlbum = albums[0];
-    async function displayAlbums() {
-      const response = await fetch('https://jsonplaceholder.typicode.com/albums');
-      const albums = await response.json();
-
-      const albumsContainer = document.getElementById('albums-container');
-      if (!albumsContainer) {
-        console.error('Could not find the albums container element');
-        return;
-      }
-
-      let html = '';
-      albums.forEach((album, index) => {
-        html += `
-          <div class="album" onclick="displayPlaylist(${index})">
-            <p>${album.title}</p>
-          </div>
-        `;
-      });
-
-      albumsContainer.innerHTML = html;
-    }
-
-
-
-
-
+    
+   
 
 
     albumElements.forEach((albumElement, index) => {
@@ -64,8 +39,6 @@ fetch('albums.json')
     // });
 
 
-
-
     searchButton.addEventListener("click", () => {
       const searchedAlbum = albums.find(album => album.title.toLowerCase().includes(searchInput.value.toLowerCase()));
       if (searchedAlbum) {
@@ -77,53 +50,73 @@ fetch('albums.json')
     });
 
 
-
-
     // function playSong(src) {
     //   document.getElementById('music-player').src = src;
     //   document.getElementById('music-player').play();
     // }
 
 
-    albums.forEach((album, index) => {
-      const playlist = document.createElement('div');
-      playlist.classList.add('playlist');
-      playlist.id = `playlist-${index}`;
-      playlist.innerHTML = `
-    <h3>${album.title}</h3>
-    <ol class="ol-playlist">
-    ${album.songs.map(song => `<li class="playsong-li"><a class="playsong" href="#" onclick="playSong('${song.src}')">${song.title}</a> <a class="playsong-artist" href="#">${album.artist}</a></li>`)}
-      </ol>`;
-
-      playlist.querySelectorAll('.playsong').forEach((playSongElement, songIndex) => {
-        playSongElement.addEventListener('click', (event) => {
-          event.preventDefault();
-          document.getElementById('music-player').src = album.songs[songIndex].src;
-          document.getElementById('music-player').play();
-        });
-      });
-      document.getElementById('playlist').appendChild(playlist);
-    });
-
 
     function displayPlaylist(index) {
-      const allPlaylists = document.getElementById('playList');
+      const allPlaylists = document.getElementById('playlist').children;
       for (let i = 0; i < allPlaylists.length; i++) {
         allPlaylists[i].style.display = 'none';
       }
-      const selectedPlaylist = document.getElementById(`playList-${index}`);
+      const selectedPlaylist = document.getElementById(`playlist-${index}`);
       if (selectedPlaylist) {
         selectedPlaylist.style.display = 'block';
       }
-  };
-
+    }
+    
+    
 
 
 
   });
+  async function displayAlbums() {
+    const response = await fetch('albums.json');
+    const albums = await response.json();
+  
+    const playlistContainer = document.getElementById('playlist');
+    albums.forEach((album, index) => {
+      const playlist = document.createElement('div');
+      playlist.classList.add('playlist');
+      playlist.id = `playlist-${index}`;
+      playlist.style.display = 'none';
+  
+      playlist.innerHTML = `
+        <h3>${album.title}</h3>
+        <ol class="ol-playlist">
+          ${album.songs.map(song => `<li class="playsong-li"><a class="playsong" href="#">${song.title}</a> <a class="playsong-artist" href="#">${album.artist}</a></li>`)}
+        </ol>
+      `;
+  
+      playlistContainer.appendChild(playlist);
+    });
+  
+    const albumsContainer = document.getElementById('albums');
+    albums.forEach((album, index) => {
+      const albumEl = document.createElement('div');
+      albumEl.classList.add('album');
+  
+      albumEl.innerHTML = `
+        <div class="album-cover">
+          <img src="${album.cover}" alt="${album.title}">
+        </div>
+        <div class="album-info">
+          <h2 class="album-title">${album.title}</h2>
+          <p class="album-artist">${album.artist}</p>
+        </div>
+      `;
+  
+      albumEl.addEventListener('click', () => {
+        displayPlaylist(index);
+      });
+  
+      albumsContainer.appendChild(albumEl);
+    });
+  }
+  
 
 
-
-
-
-
+  

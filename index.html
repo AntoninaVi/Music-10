@@ -42,12 +42,12 @@
                 <div class="albums-container-albums" id="albums">
                     <h1 class="albums-title">Original Soundtrack</h1>
                     <ul id="albumList">
-                        <div onclick="displayPlaylist(0)" class="album" id="album1">
+                        <div class="album" id="album1">
                             <img src="/img/Berlin-Calling.jpg" alt="album-cover"  class="album-cover">
                             <h2 class="album-title"> Aaron</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div onclick="displayPlaylist(1)" class="album" id="album2">
+                        <div  class="album" id="album2">
                             <img src="img/altes.png" alt="album-cover" class="album-cover">
                             <h2 class="album-title"> Altes</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
@@ -107,7 +107,7 @@
                 </div>
             </section>
 
-            <section class="player-container">
+            <section id="playlistContainer" class="player-container">
                 <div id="player">
 
                     <div id="song-title">
@@ -130,10 +130,7 @@
                         <button id="stopbtn" onClick="wavesurfer.stop()">stop</button>
                     </div>
 
-                    <!-- <div id="progress-bar">
-                        <div id="progress"></div>
-                    </div> -->
-                    <div class="playlist" id="playList"></div>
+                    <div class="playlist" id="playlist"></div>
                 </div>
 
             </section>
@@ -167,7 +164,7 @@
         barRadius: 30,
         cursorColor: '#FFCD06',
     });
-    // wavesurfer.load(albumsRef);
+    // wavesurfer.load(albums.json);
     playBtn.onClick = function () {
         wavesurfer.playPause();
     }
