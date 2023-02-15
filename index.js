@@ -8,17 +8,14 @@ fetch('albums.json')
     const albumElements = document.querySelectorAll(".album");
     const player = document.querySelector("#music-player");
     const songTitle = document.querySelector("#song-title");
-    const progressBar = document.querySelector("#progress-bar");
-    const progress = document.querySelector("#progress");
+    // const progressBar = document.querySelector("#progress-bar");
+    // const progress = document.querySelector("#progress");
     const searchInput = document.querySelector("#search-input");
     const searchButton = document.querySelector("#search-button");
     const playlist = document.getElementById('playlist');
 
     let currentAlbum = albums[0];
     
-   
-
-
     albumElements.forEach((albumElement, index) => {
       albumElement.addEventListener("click", () => {
         currentAlbum = albums[index];
@@ -57,8 +54,18 @@ fetch('albums.json')
 
 
 
+    // function displayPlaylist(index) {
+    //   const allPlaylists = document.getElementById('playlist').children;
+    //   for (let i = 0; i < allPlaylists.length; i++) {
+    //     allPlaylists[i].style.display = 'none';
+    //   }
+    //   const selectedPlaylist = document.getElementById(`playlist-${index}`);
+    //   if (selectedPlaylist) {
+    //     selectedPlaylist.style.display = 'block';
+    //   }
+    // }
     function displayPlaylist(index) {
-      const allPlaylists = document.getElementById('playlist').children;
+      const allPlaylists = document.getElementById('playlist-container').children;
       for (let i = 0; i < allPlaylists.length; i++) {
         allPlaylists[i].style.display = 'none';
       }
@@ -68,9 +75,7 @@ fetch('albums.json')
       }
     }
     
-    
-
-
+  
 
   });
   async function displayAlbums() {
