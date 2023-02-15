@@ -37,6 +37,11 @@
                 "title": "Altes",
                 "data": "Base64-encoded data for Altes",
                 "src": "files/Berlin calling/Altes.mp3"
+            },
+            {
+                "title": "Altes",
+                "data": "Base64-encoded data for Altes",
+                "src": "files/Berlin calling/Altes.mp3"
             }
         ]
     }
