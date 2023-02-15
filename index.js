@@ -172,7 +172,6 @@ fetch('albums.json')
     const progressBar = document.querySelector("#progress-bar");
     const progress = document.querySelector("#progress");
 
-    // const playlist = document.querySelector('.player-container');
 
 
     let currentAlbum = albums[0];
@@ -195,8 +194,10 @@ fetch('albums.json')
         songTitle.innerHTML = currentAlbum.songs[0].title;
         player.src = currentAlbum.songs[0].src;
         player.play();
+        displayPlaylist()
       });
     });
+  
 
     player.addEventListener("timeupdate", () => {
       waveform.style.width = `${(player.currentTime / player.duration) * 100}%`;
@@ -210,15 +211,16 @@ fetch('albums.json')
 
 // Playlist
 function displayPlaylist(index) {
-  const playlist = document.getElementById('playlist');
-  for (let i = 0; i < playlist.length; i++) {
-    if (album === index) {
-      playlist[i].style.display = 'block';
-    } else {
-      playlist[i].style.display = 'none';
-    }
+  const playlists = document.querySelectorAll('.playlist');
+  const playlist = document.querySelector(`#playlist-${index}`);
+  if (playlist) {
+    playlists.forEach((p) => p.style.display = 'block');
+    playlist.style.display = 'none';
   }
 }
+
+
+
 
 
 
@@ -242,8 +244,8 @@ fetch('albums.json')
 
       const searchInput = document.getElementById("search-input");
       const searchButton = document.getElementById("search-button");
-        const songTitle = document.querySelector("#song-title");
-        const player = document.querySelector("#music-player");
+      const songTitle = document.querySelector("#song-title");
+      const player = document.querySelector("#music-player");
       searchButton.addEventListener("click", () => {
 
         const searchedAlbum = albums.find(album => album.name.toLowerCase().includes(searchInput.value.toLowerCase()));
@@ -252,9 +254,8 @@ fetch('albums.json')
           songTitle.innerHTML = currentAlbum.songs[0].title;
           player.src = currentAlbum.songs[0].src;
           player.play();
-
-          // Update playlist
           displayPlaylist(albums.indexOf(searchedAlbum));
+          
         }
       });
 
@@ -270,5 +271,13 @@ function playSong(title, src) {
 
   songTitle.innerHTML = title;
   player.src = src;
-  player.play();
+  player.addEventListener('canplaythrough', () => {
+    player.play();
+  });
 };
+
+
+
+
+
+

@@ -19,7 +19,6 @@
         "songs": [
             {
                 "title": "Altes",
-                "data": "Base64-encoded data for Song 3",
                 "src": "files/Altes/Altes.mp3"
             }
         
