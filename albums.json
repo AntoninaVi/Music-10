@@ -4,14 +4,17 @@
         "songs": [
             {
                 "title": "Aaron",
-                "data": "Base64-encoded data for Aaron",
                 "src": "files/Berlin calling/Aaron.mp3"
             },
             {
-                "title": "Altes",
-                "data": "Base64-encoded data for Altes",
-                "src": "files/Berlin calling/Altes.mp3"
+                "title": "Absynthe",
+                "src": "files/Berlin calling/absynthe.mp3"
+            },
+            {
+                "title": "Queer Fellow",
+                "src": "files/Berlin calling/queer_fellow.mp3"
             }
+
         ]
     },
     {
@@ -20,27 +23,23 @@
             {
                 "title": "Altes",
                 "src": "files/Altes/Altes.mp3"
+            },
+            {
+                "title": "Queer Fellow",
+                "src": "files/Berlin calling/queer_fellow.mp3"
             }
-        
         ]
     },
     {
-        "name": "Aaron",
+        "name": "Icke",
         "songs": [
             {
-                "title": "Aaron",
-                "data": "Base64-encoded data for Aaron",
-                "src": "files/Berlin calling/Aaron.mp3"
+                "title": "Altes",
+                "src": "files/Altes/Altes.mp3"
             },
             {
-                "title": "Altes",
-                "data": "Base64-encoded data for Altes",
-                "src": "files/Berlin calling/Altes.mp3"
-            },
-            {
-                "title": "Altes",
-                "data": "Base64-encoded data for Altes",
-                "src": "files/Berlin calling/Altes.mp3"
+                "title": "Queer Fellow",
+                "src": "files/Berlin calling/queer_fellow.mp3"
             }
         ]
     }

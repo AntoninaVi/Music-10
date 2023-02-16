@@ -282,3 +282,8 @@ audio {
 .time {
   color: #fff;
 }
+
+#waveform {
+  background-color: yellow;
+  max-height: 20px;
+}
