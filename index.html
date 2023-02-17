@@ -7,9 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
-
+<!-- 
     <script src="https://unpkg.com/wavesurfer.js"></script>
-    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js"></script> -->
 
     <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
@@ -43,16 +43,16 @@
                     <h1 class="albums-title">Original Soundtrack</h1>
                     <ul id="albumList">
                         <div class="album" id="album1">
-                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" class="album-cover">
+                            <img src="/img/Berlin-Calling.jpg" alt="album-cover" class="album-cover" id="album-cover">
                             <h2 class="album-title">Aaron</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div class="album" id="album2">
-                            <img src="img/altes.png" alt="album-cover" class="album-cover">
+                        <div class="album" id="album1">
+                            <img src="img/altes.png" alt="album-cover" class="album-cover" id="album-cover">
                             <h2 class="album-title">Altes</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album" id="album1">
                             <img src="img/icke.jpg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Icke Wieder</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
@@ -82,7 +82,7 @@
                             <h2 class="album-title">The Best of Chopin</h2>
                             <h3 class="album-title__artist">Frédéric Chopin</h3>
                         </div>
-                    
+
                         <div class="album" id="album1">
                             <img src="/img/recondite.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Iffy</h2>
@@ -98,7 +98,7 @@
                             <h2 class="album-title">Tag Remixes</h2>
                             <h3 class="album-title__artist">Martin Kohlstedt</h3>
                         </div>
-                            <div class="album" id="album1">
+                        <div class="album" id="album1">
                             <img src="/img/lambert.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Open</h2>
                             <h3 class="album-title__artist">Lambert</h3>
@@ -109,31 +109,33 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
+                <div class="album-text">
+                    <h3 id="song-title">
+                    </h3>
+                </div>
+
+                <!-- <div id="waveform-timeline"></div> -->
                 <div id="player">
 
-                    <div id="song-title">
-                        Song Title
-                    </div>
-                    <audio id="music-player" controls>
+
+
+                    <audio id="music-player">
 
                     </audio>
-                    <div id="waveform">
+
+
+
+
+
+                    <div class="playlist" id="playlist">
 
                     </div>
-                    <div id="waveform-timeline"></div>
 
+                    <canvas id="waveform"></canvas>
 
-
-                    <!-- <div class="">Total time: <span id="time-total">0</span> milliseconds</div>
-                    <div>Current time: <span id="time-current">0</span> milliseconds</div>
-                    <div>Ramaining time: <span id="time-remaining">0</span> milliseconds</div> -->
-                    <div class="control-bar">
-                        <button id="playbtn" onClick="wavesurfer.playPause()">play</button>
-                        <button id="stopbtn" onClick="wavesurfer.stop()">stop</button>
-                    </div>
-
-                    <div class="playlist" id="playlist"></div>
                     </audio>
+
+
 
             </section>
 
@@ -152,48 +154,44 @@
 
 <script>
 
-
-    const playBtn = document.getElementById('playbtn');
-    const stopBtn = document.getElementById('stopbtn');
-
-    var wavesurfer = WaveSurfer.create({
-        container: '#waveform',
-        waveColor: '#FFCD06',
-        progressColor: '#FFCD06',
-        barHeight: 1,
-        // audioRate: 6,
-        autoCenter: true,
-        barRadius: 30,
-        cursorColor: '#FFCD06',
-    });
-    wavesurfer.load('albums.json');
+    // var wavesurfer = WaveSurfer.create({
+    //     container: '#waveform',
+    //     waveColor: '#ffffff',
+    //     progressColor: '#FFCD06',
+      
+    //     // audioRate: 6,
+    //     autoCenter: true,
+     
+    //     cursorColor: '#FFCD06',
+    // });
+    // wavesurfer.load('albums.json');
     // playBtn.onClick = function () {
     //     wavesurfer.playPause();
     // }
     // stopBtn.onClick = function () {
     //     wavesurfer.stop();
     // }
-    wavesurfer.on('ready', function () {
-        var timeline = Object.create(WaveSurfer.Timeline);
-        timeline.init({
-            wavesurfer: wavesurfer,
-            container: '#waveform-timeline',
-            primaryFontColor: '#fff',
-            primaryColor: '#fff',
-            secondaryColor: '#fff',
-            secondaryFontColor: '#fff'
-        });
-    });
-    wavesurfer.on('audioprocess', function () {
-        if (wavesurfer.isPlaying()) {
-            var totalTime = wavesurfer.getDuration(),
-                currentTime = wavesurfer.getCurrentTime(),
-                remainingTime = totalTime - currentTime;
-            document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
-            document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
-            document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
-        }
-    });
+    // wavesurfer.on('ready', function () {
+    //     var timeline = Object.create(WaveSurfer.Timeline);
+    //     timeline.init({
+    //         wavesurfer: wavesurfer,
+    //         container: '#waveform-timeline',
+    //         primaryFontColor: '#fff',
+    //         primaryColor: '#fff',
+    //         secondaryColor: '#fff',
+    //         secondaryFontColor: '#fff'
+    //     });
+    // });
+    // wavesurfer.on('audioprocess', function () {
+    //     if (wavesurfer.isPlaying()) {
+    //         var totalTime = wavesurfer.getDuration(),
+    //             currentTime = wavesurfer.getCurrentTime(),
+    //             remainingTime = totalTime - currentTime;
+    //         document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
+    //         document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
+    //         document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
+    //     }
+    // });
 
 </script>
 

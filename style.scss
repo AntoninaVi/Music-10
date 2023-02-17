@@ -29,12 +29,15 @@ body {
 }
 
 .albums-container {
+    position: relative;
+    left: 1em;
     background: #ffffff;
     border-radius: 22px;
     flex-basis: 75%;
     max-width: 60rem;
     width: 100%;
-
+    border-radius: 22px;
+   
     &-container-albums {
         display: grid;
     }
@@ -58,12 +61,15 @@ body {
 #albumList {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10.5em, 12em));
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     column-gap: 2em;
     row-gap: 3em;
 }
 .album {
     cursor: pointer;
+    &:hover {
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+    }
 }
 
 .player {
@@ -95,24 +101,29 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 40vmax;
-    flex-basis: 30%;
+    height: 100vh;
     padding-top: 1.5em;
     border-radius: 0 22px 22px 0;
+    max-width: 28.9em;
+    width: 90%;
+    padding: 1.5em 1.5em;
 }
 #song-title {
+    position: relative;
+    left: 3.6em;
+    top: 0.6em;
+    width: 80%;
     font-weight: 500;
     font-size: 22px;
     line-height: 26px;
     color: #ffffff;
-    text-align: left;
 }
 
 #playlist {
 }
 .album-cover {
     width: 192px;
-    height: 192;
+    height: 192px;
     border-radius: 12px;
 }
 h1 {
@@ -141,11 +152,14 @@ h1 {
 }
 
 .playsong {
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
-    padding: 10px 24px;
+    text-decoration: none;
+    padding: 0.5em 0.5em;
+   padding-left: 1em;
 }
 .playsong:hover {
     color: #3a3a3a;
@@ -175,29 +189,21 @@ input {
     vertical-align: middle;
 }
 .ol-playlist {
-    margin-left: 1.5em;
-    margin-right: 1.5em;
+    margin-top: 2em;
 }
-.playsong {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #ffffff;
-    text-decoration: none;
-}
-ol li::marker {
+
+ol .playsong-li::marker {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 12px;
-    color: #d0cece;
+    color: #ea1313;
     opacity: 0.4;
 }
-ol li {
-    height: 2.5em;
-    width: 100%;
-}
+// ol li {
+//     height: 2.5em;
+//     width: 100%;
+// }
 
 .playsong-artist {
     font-weight: 400;
@@ -211,8 +217,10 @@ ol li {
 }
 .playsong-li {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 11em 11em 3em;
+    align-items: center;
     width: 100%;
+    margin-bottom: 2em;
     &:hover {
         background-image: url(img/plau.svg);
         background-repeat: no-repeat;
@@ -222,6 +230,7 @@ ol li {
         cursor: pointer;
     }
 }
+
 .playsong-li:hover .playsong {
     color: #3a3a3a;
 }
@@ -229,17 +238,69 @@ ol li {
     color: #3a3a3a;
     opacity: 0.6;
 }
-audio{
+.playsong-li:hover .playsong-duration {
+    color: #3a3a3a;
+    opacity: 0.6;
+}
+.playsong-duration {
+    color: #ffffff;
+    opacity: 0.6;
+}
+audio {
     background-color: red;
 }
-.time{
+.album-name {
     color: #fff;
 }
-// .playlist.active {
-//     display: block;
-//     background-color: #ccc;
-//   }
-#waveform{
-    background-color: yellow;
-    max-height: 20px;
+.album-artist {
+    color: #fff;
+}
+.time {
+    color: #fff;
+}
+
+#waveform {
+    width: 100%;
+    height: 100px;
+    background-color: #FFCD06;
+  }
+  
+.album-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    height: 4em;
+    &__cover {
+        margin-right: 1em;
+        width: 4em;
+        height: 4em;
+        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+        border-radius: 8px;
+    }
+}
+.album-text {
+    position: relative;
+    top: 0.8em;
+    &__song-title {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26px;
+        color: #ffffff;
+    }
+    &__album-name {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #ffffff;
+
+        opacity: 0.6;
+    }
+    &__album-artist {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #ffcd06;
+    }
 }

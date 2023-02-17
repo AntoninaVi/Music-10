@@ -1,134 +1,176 @@
 [
     {
+        "artist": "Paul Kalkbrenner",
         "name": "Berlin Calling",
+        "cover": "img/Berlin-Calling.jpg",
         "songs": [
             {
                 "title": "Aaron",
-                "src": "files/Berlin calling/Aaron.mp3"
+                "src": "files/Berlin calling/Aaron.mp3",
+                "duration": "6:00"
             },
             {
                 "title": "Absynthe",
-                "src": "files/Berlin calling/absynthe.mp3"
+                "src": "files/Berlin calling/absynthe.mp3",
+                "duration": "5:37"
             },
             {
                 "title": "Queer Fellow",
-                "src": "files/Berlin calling/queer_fellow.mp3"
+                "src": "files/Berlin calling/queer_fellow.mp3",
+                "duration": "4:16"
             }
 
         ]
     },
     {
+        "artist": "Paul Kalkbrenner",
         "name": "Altes Kamuffel",
+        "cover": "img/altes.png",
         "songs": [
             {
                 "title": "Altes Kamuffel",
-                "src": "files/Altes Kamuffel/Altes.mp3"
+                "src": "files/Altes Kamuffel/Altes.mp3",
+                "duration": "8:21"
             }
         ]
     },
     {
+        "artist": "Paul Kalkbrenner",
         "name": "Icke Wieder",
+        "cover": "img/icke.jpg",
         "songs": [
             {
                 "title": "Böxig Leise",
-                "src": "files/Icke Wieder/Böxig_Leise.mp3"
+                "src": "files/Icke Wieder/Böxig_Leise.mp3",
+                "duration": "5:29"
             },
             {
                 "title": "Sagte Der Bär",
-                "src": "files/Icke Wieder/Sagte_Der_Baer.mp3"
+                "src": "files/Icke Wieder/Sagte_Der_Baer.mp3",
+                "duration": "4:48"
             }
         ]
     },
     {
+        "artist": "Sergey Prokofiev",
         "name": "Best Works",
+        "cover": "img/prokofiev.jpeg",
         "songs": [
             {
                 "title": "Dance of the Knights",
-                "src": "files/Prokofiev/Dance of the Knights.mp3"
+                "src": "files/Prokofiev/Dance of the Knights.mp3",
+                "duration": "5:25"
             },
             {
                 "title": "Piano Sonata No. 1 in F minor Op. 1 Score",
-                "src": "files/Prokofiev/Piano Sonata No 1 in F minor Op 1 Score.mp3"
+                "src": "files/Prokofiev/Piano Sonata No 1 in F minor Op 1 Score.mp3",
+                "duration": "8:03"
             },
             {
                 "title": "Waltzes Suite For Orchestra Op 110  No 1 Since We Met",
-                "src": "files/Prokofiev/ Waltzes Suite For Orchestra Op 110  No 1 Since We Met.mp3"
+                "src": "files/Prokofiev/ Waltzes Suite For Orchestra Op 110  No 1 Since We Met.mp3",
+                "duration": "6:16"
             }
         ]
     },
     {
+        "artist": "Sergey Rachmaninoff",
         "name": "Very Best of Rachmaninoff",
+        "cover": "img/rachmaninov.jpeg",
         "songs": [
             {
                 "title": "Prelude in G Minor Op 23 No 5",
-                "src": "files/Rachmaninoff/Prelude in G Minor Op 23 No 5.mp3"
+                "src": "files/Rachmaninoff/Prelude in G Minor Op 23 No 5.mp3",
+                "duration": "3:39"
             },
             {
                 "title": "Italian Polka",
-                "src": "files/Rachmaninoff/Italian Polka.mp3"
+                "src": "files/Rachmaninoff/Italian Polka.mp3",
+                "duration": "2:02"
             }
         ]
     },
     {
+        "artist": "Aram Khachaturian",
         "name": "Masquerade Waltz",
+        "cover": "img/Khachaturian.jpeg",
         "songs": [
             {
                 "title": "Masquerade Suite Waltz",
-                "src": "files/Khachaturian/Masquerade Suite  Waltz.mp3"
+                "src": "files/Khachaturian/Masquerade Suite  Waltz.mp3",
+                "duration": "4:05"
             }
         ]
     },
     {
+        "artist": "Joseph Haydn",
         "name": "Best of Haydn",
+        "cover": "img/haydn.jpeg",
         "songs": [
             {
                 "title": "Sonata nº 10 en do mayor Hob XVI1 I Allegro",
-                "src": "files/Haydn/Sonata nº 10 en do mayor Hob XVI1 I Allegro.mp3"
+                "src": "files/Haydn/Sonata nº 10 en do mayor Hob XVI1 I Allegro.mp3",
+                "duration": "2:49"
             }
         ]
     },
     {
+        "artist": "Frédéric Chopin",
         "name": "The Best of Chopin",
+        "cover": "img/chopin.jpeg",
         "songs": [
             {
                 "title": "Waltz no 6 in D flat Op 64 no 1 Minute Waltz",
-                "src": "files/Chopin/Waltz no 6 in D flat Op 64 no 1 Minute Waltz.mp3"
+                "src": "files/Chopin/Waltz no 6 in D flat Op 64 no 1 Minute Waltz.mp3",
+                "duration": "1:54"
             }
         ]
     },
     {
+        "artist": "Recondite",
         "name": "Iffy",
+        "cover": "img/recondite.jpeg",
         "songs": [
             {
                 "title": "Levo",
-                "src": "files/Recondite/Levo.mp3"
+                "src": "files/Recondite/Levo.mp3",
+                "duration": "6:14"
             }
         ]
     },
     {
+        "artist": "SHXCXCHCXSH",
         "name": "Linear S Decoded",
+        "cover": "img/shxcxchcxsh.jpeg",
         "songs": [
             {
                 "title": "Monolithic Conclusion",
-                "src": "files/SHXCXCHCXSH/Monolithic Conclusion.mp3"
+                "src": "files/SHXCXCHCXSH/Monolithic Conclusion.mp3",
+                "duration": "4:49"
             }
         ]
     },
     {
+        "artist": "Martin Kohlstedt",
         "name": "Tag Remixes",
+        "cover": "img/kohlstedt.jpeg",
         "songs": [
             {
                 "title": "Fli",
-                "src": "files/Kohlstedt/Fli-remix.mp3"
+                "src": "files/Kohlstedt/Fli-remix.mp3",
+                "duration": "4:40"
             }
         ]
     },
     {
+        "artist": "Lambert",
         "name": "Open",
+        "cover": "img/lambert.jpeg",
         "songs": [
             {
                 "title": "The Open",
-                "src": "files/Lambert/The Open.mp3"
+                "src": "files/Lambert/The Open.mp3",
+                "duration": "3:46"
             }
         ]
     }
