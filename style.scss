@@ -222,9 +222,7 @@ ol .playsong-li::marker {
     width: 100%;
     margin-bottom: 2em;
     &:hover {
-        background-image: url(img/plau.svg);
-        background-repeat: no-repeat;
-        background-position: left center;
+      
         background-color: #ffffff;
         border-radius: 6px;
         cursor: pointer;
@@ -304,3 +302,17 @@ audio {
         color: #ffcd06;
     }
 }
+.play-btn{
+    width: 5em;
+    height: 5em;
+}
+.fa-play:before {
+    content: url(img/plau.svg);
+    width: 0.5em;
+  }
+  .fa-pause:before {
+    content: url(img/pause.svg);
+    width: 0.5em;
+    height: 0.5em;
+  }
+  

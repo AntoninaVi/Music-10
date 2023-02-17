@@ -124,61 +124,48 @@ function playSong(title, src) {
 // Buttons
 
 
+const playPauseBtn = document.getElementById('play-pause-btn');
+const player = document.querySelector('#music-player');
 
-const addPlayButtons = () => {
-  const songs = document.querySelectorAll('.playsong');
-  songs.forEach(song => {
-    const playButton = document.createElement('button');
-    playButton.classList.add('play-btn');
-    playButton.innerHTML = '<i class="fa fa-play"></i>';
-    song.parentElement.appendChild(playButton);
-  });
-  addPlayButtons();
-document.addEventListener('mouseover', (event) => {
-  const target = event.target;
-  if (target.classList.contains('playsong')) {
-    const playButton = target.parentElement.querySelector('.play-btn');
-    playButton.style.display = 'inline-block';
-  }
-});
-};
-
-
-document.addEventListener('click', (event) => {
-  const target = event.target;
-  if (target.classList.contains('play-btn')) {
-    const song = target.parentElement.querySelector('.playsong');
-    const audioSrc = song.getAttribute('data-src');
-    const audioTitle = song.textContent;
-    const albumName = song.nextElementSibling.textContent;
-    const songTitle = document.querySelector('.song__title');
-    playerTitle.textContent = `${songTitle} - ${albumName}`;
-    player.src = audioSrc;
+playPauseBtn.addEventListener('click', () => {
+  if (player.paused) {
     player.play();
-    target.style.display = 'none';
-  }
-});
-document.addEventListener('mouseover', (event) => {
-  const target = event.target;
-  if (target.classList.contains('playsong') && !player.paused) {
-    const pauseButton = target.parentElement.querySelector('.pause-btn');
-    if (!pauseButton) {
-      const newButton = document.createElement('button');
-      newButton.classList.add('pause-btn');
-      newButton.innerHTML = '<i class="fa fa-pause"></i>';
-      target.parentElement.appendChild(newButton);
-    } else {
-      pauseButton.style.display = 'inline-block';
-    }
-  }
-});
-document.addEventListener('click', (event) => {
-  const target = event.target;
-  if (target.classList.contains('pause-btn')) {
-    const song = target.parentElement.querySelector('.playsong');
-    const playButton = target.parentElement.querySelector('.play-btn');
+    playPauseBtn.classList.remove('play-btn');
+    playPauseBtn.classList.add('pause-btn');
+  } else {
     player.pause();
-    target.style.display = 'none';
-    playButton.style.display = 'inline-block';
+    playPauseBtn.classList.remove('pause-btn');
+    playPauseBtn.classList.add('play-btn');
   }
 });
+
+player.addEventListener('play', () => {
+  playPauseBtn.classList.remove('play-btn');
+  playPauseBtn.classList.add('pause-btn');
+});
+
+player.addEventListener('pause', () => {
+  playPauseBtn.classList.remove('pause-btn');
+  playPauseBtn.classList.add('play-btn');
+});
+
+playPauseBtn.addEventListener("click", function() {
+  if (player.paused) {
+    player.play();
+    playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+  } else {
+    player.pause();
+    playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
+  }
+});
+
+playPauseBtn.addEventListener("click", () => {
+  if (player.paused) {
+    player.play();
+    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    player.pause();
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+});
+
