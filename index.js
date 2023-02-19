@@ -108,27 +108,25 @@ fetch('albums.json')
         playlist.innerHTML = `  <h3 class="album-text__song-title">${currentAlbum.songs[0].title}</h3>`
       }
     });
-
+   
 
     const addPlayPauseButton = () => {
       const playButtons = document.querySelectorAll('.playsong-buttons');
       const player = document.querySelector('#music-player');
-      let currentSongButton = null;
-
-
+    
       if (!player) {
         console.error('Music not found.');
         return;
       }
-
+    
       playButtons.forEach((button) => {
         const image = document.createElement("img");
         image.classList.add('equalizer');
         image.setAttribute('src', 'img/equalizer.svg');
         button.appendChild(image);
-
+        image.style.display = "none"; // initially hide the image
+    
         button.addEventListener('click', () => {
-          if(button === currentSongButton){}
           if (player.paused) {
             player.play();
             button.classList.remove('play');
@@ -139,28 +137,29 @@ fetch('albums.json')
             button.classList.remove('pause');
             button.classList.add('play');
             image.style.display = "none";
-          }
+          } 
         });
       });
     };
-
+    
+    
     addPlayPauseButton();
-
+    
   });
 
 
+  
+// function playSong(title, src) {
+//   const player = document.querySelector("#music-player");
+//   const songTitle = document.querySelector("#song-title");
+//   songTitle.innerHTML = title;
+//   player.src = src;
+//   player.addEventListener('canplaythrough', () => {
+//     player.play();
+//   });
 
-function playSong(title, src) {
-  const player = document.querySelector("#music-player");
-  const songTitle = document.querySelector("#song-title");
-  songTitle.innerHTML = title;
-  player.src = src;
-  player.addEventListener('canplaythrough', () => {
-    player.play();
-  });
-
-
-};
+  
+// };
 
 // Buttons
 
