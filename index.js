@@ -66,7 +66,11 @@ fetch('albums.json')
           ${album.songs
           .map(
             (song) =>
-              `<li class="playsong-li"><a class="playsong" href="#" onclick="playSong('${song.title}', '${song.src}')">${song.title}</a>
+              `<li class="playsong-li"> <div class="playsong-buttons">
+              <button id="play-button" class="playsong play"></button>
+              </div>
+             
+              <a class="playsong-link" href="#" onclick="playSong('${song.title}', '${song.src}')">${song.title}</a>
                   <a class="playsong-artist" href="#">${album.name}</a>
                   <span class="playsong-duration">${song.duration}</span>
                   </li>`
@@ -104,68 +108,106 @@ fetch('albums.json')
         playlist.innerHTML = `  <h3 class="album-text__song-title">${currentAlbum.songs[0].title}</h3>`
       }
     });
+
+
+    const addPlayPauseButton = () => {
+      const playButtons = document.querySelectorAll('.playsong-buttons');
+      const player = document.querySelector('#music-player');
+      let currentSongButton = null;
+
+
+      if (!player) {
+        console.error('Music not found.');
+        return;
+      }
+
+      playButtons.forEach((button) => {
+        const image = document.createElement("img");
+        image.classList.add('equalizer');
+        image.setAttribute('src', 'img/equalizer.svg');
+        button.appendChild(image);
+
+        button.addEventListener('click', () => {
+          if(button === currentSongButton){}
+          if (player.paused) {
+            player.play();
+            button.classList.remove('play');
+            button.classList.add('pause');
+            image.style.display = "block";
+          } else {
+            player.pause();
+            button.classList.remove('pause');
+            button.classList.add('play');
+            image.style.display = "none";
+          }
+        });
+      });
+    };
+
+    addPlayPauseButton();
+
   });
 
 
-  
+
 function playSong(title, src) {
-  
   const player = document.querySelector("#music-player");
   const songTitle = document.querySelector("#song-title");
   songTitle.innerHTML = title;
-  
   player.src = src;
   player.addEventListener('canplaythrough', () => {
     player.play();
   });
-  
+
+
 };
 
 // Buttons
 
 
-const playPauseBtn = document.getElementById('play-pause-btn');
-const player = document.querySelector('#music-player');
 
-playPauseBtn.addEventListener('click', () => {
-  if (player.paused) {
-    player.play();
-    playPauseBtn.classList.remove('play-btn');
-    playPauseBtn.classList.add('pause-btn');
-  } else {
-    player.pause();
-    playPauseBtn.classList.remove('pause-btn');
-    playPauseBtn.classList.add('play-btn');
-  }
-});
+// const playPauseBtn = document.getElementById('play-pause-btn');
+// const player = document.querySelector('#music-player');
 
-player.addEventListener('play', () => {
-  playPauseBtn.classList.remove('play-btn');
-  playPauseBtn.classList.add('pause-btn');
-});
+// playPauseBtn.addEventListener('click', () => {
+//   if (player.paused) {
+//     player.play();
+//     playPauseBtn.classList.remove('play-btn');
+//     playPauseBtn.classList.add('pause-btn');
+//   } else {
+//     player.pause();
+//     playPauseBtn.classList.remove('pause-btn');
+//     playPauseBtn.classList.add('play-btn');
+//   }
+// });
 
-player.addEventListener('pause', () => {
-  playPauseBtn.classList.remove('pause-btn');
-  playPauseBtn.classList.add('play-btn');
-});
+// player.addEventListener('play', () => {
+//   playPauseBtn.classList.remove('play-btn');
+//   playPauseBtn.classList.add('pause-btn');
+// });
 
-playPauseBtn.addEventListener("click", function() {
-  if (player.paused) {
-    player.play();
-    playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
-  } else {
-    player.pause();
-    playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
-  }
-});
+// player.addEventListener('pause', () => {
+//   playPauseBtn.classList.remove('pause-btn');
+//   playPauseBtn.classList.add('play-btn');
+// });
 
-playPauseBtn.addEventListener("click", () => {
-  if (player.paused) {
-    player.play();
-    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  } else {
-    player.pause();
-    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-  }
-});
+// playPauseBtn.addEventListener("click", function() {
+//   if (player.paused) {
+//     player.play();
+//     playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+//   } else {
+//     player.pause();
+//     playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
+//   }
+// });
+
+// playPauseBtn.addEventListener("click", () => {
+//   if (player.paused) {
+//     player.play();
+//     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+//   } else {
+//     player.pause();
+//     playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+//   }
+// });
 

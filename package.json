@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/AntoninaVi/Music-10#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "firebase": "^9.17.1"
   }
-  
 }
-
-
