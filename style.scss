@@ -22,7 +22,7 @@ body {
     align-items: center;
     max-width: 1360px;
     width: 100%;
-    margin-top: 1.5em;
+
     margin-left: auto;
     margin-right: auto;
     border-radius: 22px;
@@ -101,7 +101,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 150vh;
+    min-height: 100vh;
     padding-top: 1.5em;
     border-radius: 0 22px 22px 0;
     max-width: 30.9em;
@@ -222,10 +222,11 @@ ol .playsong-li::marker {
 }
 .playsong-li {
     display: grid;
-    grid-template-columns:1em 11em 11em 3em;
+    grid-template-columns: 1em 11em 11em 3em;
     align-items: center;
     width: 100%;
-    margin-bottom: 2em;
+    height: 59%;
+
     &:hover {
         background-color: #ffffff;
         border-radius: 6px;
@@ -260,11 +261,21 @@ audio {
 .time {
     color: #fff;
 }
-
-#waveform {
-    width: 100%;
-    height: 100px;
-    background-color: #ffcd06;
+// #waveform{
+//     display: none;
+// }
+.waveform-container {
+    display: flex;
+    position: relative;
+    top: 6em;
+    right: 5em;
+    width: 29em;
+    align-items: end;
+  
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
 }
 
 .album-info {
@@ -306,63 +317,25 @@ audio {
         color: #ffcd06;
     }
 }
-// #play-pause-btn {
-//     display: block;
-//     width: 1em;
-//     height: 2em;
-//     background-color: transparent;
-//     border: none;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     cursor: pointer;
-// }
-// .fa-play:before {
-//     content: url(img/plau.svg);
-//     width: 0.5em;
-//     height: 0.2em;
-// }
-// .fa-pause:before {
-//     display: block;
-//     content: url(img/pause.svg);
-//     width: 0.5em;
-//     height: 0.2em;
-// }
-// .pause-btn {
-//     width: 0.5em;
-//     height: 0.2em;
-// }
 
-// .show-play-icon{
-//     content: url(img/plau.svg);
-// }
-// .show-pause-icon{
-//     content: url(img/pause.svg);
-// }
-.playsong-buttons{
-    display: block;
-}
-
-// #pause-button{
-//     content: url(/img/pause.svg);
-// }
-// #play-button{
-//     content: url(/img/plau.svg);
-// }
-#play-button{
+#play-button {
     width: 1.5em;
     height: 1.5em;
     border: none;
     background-color: transparent;
 }
-// .playsong-waveform{
-//     content: url(/img/equalizer.svg);
-//     // display: none;
-// }
-.fa-play{
-color: #FFCD06;
-}
-.fa-pause{
-    color: #FFCD06;
 
+i {
+}
+.fas {
+    color: #ffcd06;
+
+    width: 1em;
+    height: 1em;
+}
+
+.play-button {
+    margin-top: -3em;
+    background: transparent;
+    border: none;
 }

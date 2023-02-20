@@ -8,17 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/5ac8e979c0.js" crossorigin="anonymous"></script>
 
-
-    <script src="https://unpkg.com/wavesurfer.js"></script>
-    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js"></script>
-
-    <!-- <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script> -->
-
-    <!-- Firebase App -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js"></script> -->
-    <!-- Firebase Storage -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js"></script> -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
 
 </head>
@@ -111,18 +101,35 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
-                <div class="album-text">
+              
+
+                <div class="album-info">
                     <h3 id="song-title">
+
                     </h3>
+                    <div class="waveform-container">
+                        <div id="duration-container">
+                            <span id="duration-label">0:00</span>
+                        </div>
+                        <svg id="waveform" width="500" height="100"></svg>
+                        <div id="remaining-container">
+                            <span id="remaining-label">-0:00</span>
+                        </div>
+                    </div>
+
                 </div>
+                
 
-                <!-- <div id="waveform-timeline"></div> -->
+
+
                 <div id="player">
+                    
 
 
 
-                    <audio id="music-player">
-                        
+
+                    <audio autoplay id="music-player">
+                      
 
 
                     </audio>
@@ -132,15 +139,14 @@
 
 
                     <div class="playlist" id="playlist">
-                        <!-- <button id="play-pause-btn" class="play-btn"> 
-                            <i class="fa fa-play"></i>
-                            <i class="fas fa-play"></i>
-                        </button> -->
-                    
+
+
                     </div>
 
-                    <canvas id="waveform"></canvas>
-                   
+
+
+
+
                     </audio>
 
 
@@ -155,7 +161,7 @@
 
 
     <script src="index.js"></script>
-    <script src="firebase.js"></script>
+
 
 
 </body>
@@ -163,45 +169,85 @@
 
 <script>
 
-    // var wavesurfer = WaveSurfer.create({
-    //     container: '#waveform',
-    //     waveColor: '#ffffff',
-    //     progressColor: '#FFCD06',
-      
-    //     // audioRate: 6,
-    //     autoCenter: true,
-     
-    //     cursorColor: '#FFCD06',
-    // });
-    // wavesurfer.load('albums.json');
-    // playBtn.onClick = function () {
-    //     wavesurfer.playPause();
-    // }
-    // stopBtn.onClick = function () {
-    //     wavesurfer.stop();
-    // }
-    // wavesurfer.on('ready', function () {
-    //     var timeline = Object.create(WaveSurfer.Timeline);
-    //     timeline.init({
-    //         wavesurfer: wavesurfer,
-    //         container: '#waveform-timeline',
-    //         primaryFontColor: '#fff',
-    //         primaryColor: '#fff',
-    //         secondaryColor: '#fff',
-    //         secondaryFontColor: '#fff'
-    //     });
-    // });
-    // wavesurfer.on('audioprocess', function () {
-    //     if (wavesurfer.isPlaying()) {
-    //         var totalTime = wavesurfer.getDuration(),
-    //             currentTime = wavesurfer.getCurrentTime(),
-    //             remainingTime = totalTime - currentTime;
-    //         document.getElementById('time-total').innerText = Math.floor(totalTime * 1000);
-    //         document.getElementById('time-current').innerText = Math.floor(currentTime * 1000);
-    //         document.getElementById('time-remaining').innerText = Math.floor(remainingTime * 1000);
-    //     }
-    // });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const audioContext = new AudioContext();
+
+        const audio = document.getElementById("music-player");
+        const waveform = d3.select("#waveform");
+        const durationLabel = d3.select("#duration-label");
+        const remainingLabel = d3.select("#remaining-label");
+
+
+        const audioSource = audioContext.createMediaElementSource(audio);
+        const analyzer = audioContext.createAnalyser();
+
+        audioSource.connect(analyzer);
+        analyzer.connect(audioContext.destination);
+        const bufferLength = analyzer.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        // D3
+        const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
+        const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
+        const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
+
+
+        const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
+        const draw = () => {
+            analyzer.getByteTimeDomainData(dataArray);
+            path.attr("d", line(dataArray));
+            requestAnimationFrame(draw);
+        };
+
+        audio.onloadedmetadata = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration);
+
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
+
+
+        audio.ontimeupdate = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration - audio.currentTime);
+
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds - minutes * 60;
+
+            const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+
+            return `${minutes}:${formattedSeconds}`;
+        }
+
+        xScale.domain([0, bufferLength]);
+        yScale.domain([0, 255]);
+
+        waveform.style("display", "none");
+        durationLabel.style("display", "none");
+        remainingLabel.style("display", "none");
+
+        const showWaveform = () => {
+            waveform.style("display", "block");
+            durationLabel.style("display", "inline-block");
+            remainingLabel.style("display", "inline-block");
+        };
+
+        const playMusic = () => {
+            audio.play();
+            showWaveform();
+        };
+
+        document.addEventListener('click', playMusic);
+
+        draw();
+    });
 </script>
 
 </html>
