@@ -368,3 +368,11 @@ audio {
   border: none;
   background-color: transparent;
 }
+
+.fa-play {
+  color: #FFCD06;
+}
+
+.fa-pause {
+  color: #FFCD06;
+}

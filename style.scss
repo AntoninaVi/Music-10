@@ -355,13 +355,14 @@ audio {
     border: none;
     background-color: transparent;
 }
-// .playsong-li:hover #play-button{
-  
+// .playsong-waveform{
+//     content: url(/img/equalizer.svg);
+//     // display: none;
 // }
+.fa-play{
+color: #FFCD06;
+}
+.fa-pause{
+    color: #FFCD06;
 
-// .playsong:active button::before{
-//     content: url(/img/plau.svg);
-//     width: 0.5em;
-//     height: 0.5em;
-// }
-
+}
