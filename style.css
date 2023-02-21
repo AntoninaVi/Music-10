@@ -33,6 +33,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   border-radius: 22px;
+  padding-bottom: 2em;
 }
 
 .albums-container {
@@ -82,10 +83,6 @@ body {
 .album {
   cursor: pointer;
 }
-.album:hover {
-  -webkit-box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
-          box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
-}
 
 .player {
   display: -webkit-box;
@@ -127,7 +124,7 @@ body {
   min-height: 100vh;
   padding-top: 1.5em;
   border-radius: 0 22px 22px 0;
-  max-width: 30.9em;
+  max-width: 29.9em;
   width: 90%;
   padding: 1.5em 1.5em;
 }
@@ -142,6 +139,13 @@ body {
   width: 192px;
   height: 192px;
   border-radius: 12px;
+}
+.album-cover:hover {
+  box-shadow: 3px 12px 24px -1px rgba(11, 13, 71, 0.51);
+  -webkit-box-shadow: 3px 12px 24px -1px rgba(11, 13, 71, 0.51);
+  -moz-box-shadow: 3px 12px 24px -1px rgba(11, 13, 71, 0.51);
+  -webkit-transition: ease-in 0.3s;
+  transition: ease-in 0.3s;
 }
 
 h1 {
@@ -179,7 +183,7 @@ h1 {
   line-height: 20px;
   color: #ffffff;
   text-decoration: none;
-  padding: 0.5em 0.5em 0 0.5em;
+  padding: 0.8em 0.5em 0 0.5em;
 }
 
 .playsong-link:hover {
@@ -217,6 +221,11 @@ input {
 .profile {
   vertical-align: middle;
 }
+.profile-img {
+  width: 2em;
+  height: 2em;
+  border-radius: 20%;
+}
 
 .ol-playlist {
   margin-top: 6em;
@@ -253,11 +262,10 @@ ol .playsong-li::marker {
   display: grid;
   -ms-grid-columns: 1em 14em 11em 2em;
   grid-template-columns: 1em 14em 11em 2em;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   width: 100%;
-  height: 59%;
   cursor: pointer;
 }
 .playsong-li:hover {
@@ -282,14 +290,6 @@ ol .playsong-li::marker {
 .playsong-duration {
   color: #ffffff;
   opacity: 0.6;
-}
-
-audio {
-  background-color: red;
-}
-
-.time {
-  color: #fff;
 }
 
 .waveform-container {
@@ -333,8 +333,6 @@ audio {
   margin-right: 1em;
   width: 4em;
   height: 4em;
-  -webkit-filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
-          filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
   border-radius: 8px;
 }
 
@@ -364,7 +362,7 @@ audio {
 .fas {
   color: #ffcd06;
   position: relative;
-  top: -0.9vmax;
+  top: -0.9vw;
   left: 0.3vw;
 }
 

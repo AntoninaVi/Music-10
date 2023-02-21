@@ -63,25 +63,22 @@ fetch('albums.json')
 
         const songLi = song.closest(".playsong-li");
         songLi.addEventListener("mouseover", () => {
-          // show the play button on hover
+          // show play button on hover
           songLi.appendChild(playButton);
         });
 
         songLi.addEventListener("mouseleave", () => {
-          // remove the play button on mouseleave
+          // remove play button on mouseleave
           songLi.removeChild(playButton);
         });
       });
     };
 
 
-
-
     albums.forEach((album, index) => {
       currentAlbum = albums[index];
       const song = document.querySelectorAll('song');
       const playlist = document.createElement("div");
-
       playlist.classList.add("playlist");
       playlist.id = `playlist-${index}`;
       playlist.style.display = "none";
@@ -89,25 +86,19 @@ fetch('albums.json')
       <div class="album-info">
       <img class="album-info__cover" src="${album.cover}">
       <div class="album-text">
+    
       <h3 class="  album-text__song-title">${song.title}</h3>
         <h3 class="album-text__album-name">${album.name}</h3>
         <h3 class="album-text__album-artist">${album.artist}</h3>
-        
-      
         </div>
         </div>
         <div id="waveform" class="playlist-waveform"></div>
-        
-        
         <ol class="ol-playlist">
           ${album.songs
           .map(
             (song) =>
               `<li class="playsong-li"> 
-              
               <div class="playsong-waveform"></div>
-        
-
               <a class="playsong-link" href="#" 
                   data-song-title="${song.title}" 
                   data-song-src="${song.src}" 
@@ -129,8 +120,7 @@ fetch('albums.json')
     });
 
 
-
-
+    //search
     const searchInput = document.getElementById("search-input");
     const searchAlbum = () => {
       const searchValue = searchInput.value.toLowerCase();
@@ -138,8 +128,6 @@ fetch('albums.json')
         album.artist.toLowerCase().includes(searchValue) ||
         album.name.toLowerCase().includes(searchValue)
       );
-
-
 
       if (filteredAlbums.length > 0) {
         currentAlbum = filteredAlbums[0];
@@ -151,21 +139,18 @@ fetch('albums.json')
     };
     const searchButton = document.getElementById('search-button');
     searchButton.addEventListener("click", searchAlbum);
-
-
-
-
   });
+
+
+// play and pause song when clicked
 function playSong(title, src, playlist) {
   const player = document.querySelector("#music-player");
+  // const waveformSong = document.querySelector("#waveform-song");
   const songTitle = title;
 
-  // update the playlist element with the song title
   playlist.querySelector('.album-text__song-title').textContent = songTitle;
-
   player.src = src;
 
-  // get the waveform element for the current song
   const waveform = playlist.querySelector("#waveform");
 
   player.addEventListener("timeupdate", () => {
@@ -181,8 +166,9 @@ function playSong(title, src, playlist) {
 
 function pauseSong() {
   const player = document.querySelector("#music-player");
-  isPlaying = false; // add this line
+  isPlaying = false;
   player.pause();
+
 }
 
 
