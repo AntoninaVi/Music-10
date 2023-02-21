@@ -12,6 +12,7 @@ fetch('albums.json')
     let currentAlbum = albums[0];
 
     const displayAlbums = (albums = []) => {
+      
       albumList.innerHTML = "";
       for (const albumKey in albums) {
         const album = albums[albumKey];
@@ -20,6 +21,7 @@ fetch('albums.json')
             ${album.title} ${album.artist}
           </div>
         `;
+        
       }
     };
 
@@ -27,7 +29,7 @@ fetch('albums.json')
     albumElements.forEach((albumElement, index) => {
       albumElement.addEventListener("click", () => {
         currentAlbum = albums[index];
-        // songTitle.innerHTML = currentAlbum.songs[0].title;
+        songTitle.innerHTML = currentAlbum.songs[0].title;
         player.src = currentAlbum.songs[0].src;
         player.play();
         displayPlaylist(index);
@@ -87,7 +89,7 @@ fetch('albums.json')
       <img class="album-info__cover" src="${album.cover}">
       <div class="album-text">
     
-      <h3 class="  album-text__song-title">${song.title}</h3>
+      <h3 class="album-text__song-title">${song.title}</h3>
         <h3 class="album-text__album-name">${album.name}</h3>
         <h3 class="album-text__album-artist">${album.artist}</h3>
         </div>
