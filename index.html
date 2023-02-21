@@ -213,7 +213,9 @@
         audio.addEventListener('pause', pauseMusic);
         draw();
     });
-
+    function touchStarted() {
+        getAudioContext().resume();
+    }
 
 
 
