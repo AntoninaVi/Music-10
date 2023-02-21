@@ -105,11 +105,11 @@
                 <div class="waveformsong"></div>
                 <div class="waveform-container">
                     <div id="duration-container" class="waveform-time">
-                        <span id="duration-label">0:00</span>
+                        <span id="duration-label"></span>
                     </div>
                     <svg id="waveform" width="400" height="48"></svg>
                     <div id="remaining-container" class="waveform-time">
-                        <span id="remaining-label">-0:00</span>
+                        <span id="remaining-label"></span>
                     </div>
                 </div>
                 <div id="player">
@@ -117,7 +117,7 @@
 
 
 
-                    <audio preload="auto" id="music-player">
+                    <audio autoplay id="music-player">
                     </audio>
                     <div class="playlist" id="playlist">
                     </div>
@@ -141,7 +141,7 @@
     // waveform
     document.addEventListener('DOMContentLoaded', function () {
         const audioContext = new AudioContext();
-
+        audioContext.resume();
         const audio = document.getElementById("music-player");
         const waveform = d3.select("#waveform");
         const durationLabel = d3.select("#duration-label");
@@ -213,9 +213,7 @@
         audio.addEventListener('pause', pauseMusic);
         draw();
     });
-    function touchStarted() {
-        getAudioContext().resume();
-    }
+   
 
 
 
