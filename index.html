@@ -141,7 +141,7 @@
     // waveform
     document.addEventListener('DOMContentLoaded', function () {
         const audioContext = new AudioContext();
-        audioContext.resume();
+
         const audio = document.getElementById("music-player");
         const waveform = d3.select("#waveform");
         const durationLabel = d3.select("#duration-label");
@@ -213,7 +213,9 @@
         audio.addEventListener('pause', pauseMusic);
         draw();
     });
-   
+    function touchStarted() {
+        getAudioContext().resume();
+    }
 
 
 
