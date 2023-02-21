@@ -100,6 +100,7 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
+                <button class="play-button"></button>
                 <h3 id="song-title">
                 </h3>
                 <div class="waveformsong"></div>
@@ -199,11 +200,14 @@
             durationLabel.style("display", "inline-block");
             remainingLabel.style("display", "inline-block");
         };
-
+        
         const playMusic = () => {
             audio.play();
+            draw();
             showWaveform();
         };
+
+        audio.addEventListener('canplay', playMusic);
 
         const pauseMusic = () => {
             pauseSong();
@@ -212,10 +216,11 @@
         document.addEventListener('click', playMusic);
         audio.addEventListener('pause', pauseMusic);
         draw();
+
     });
-    function touchStarted() {
-        getAudioContext().resume();
-    }
+
+
+
 
 
 
