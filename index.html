@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="#">
     <script src="https://kit.fontawesome.com/5ac8e979c0.js" crossorigin="anonymous"></script>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -101,41 +102,37 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
-              
+                <!-- <button id="play"></button> -->
 
-                <div class="album-info">
+                <!-- <div class="album-info"> -->
                     <h3 id="song-title">
 
                     </h3>
                     <div class="waveform-container">
-                        <div id="duration-container">
+               
+                        <div id="duration-container" class="waveform-time">
                             <span id="duration-label">0:00</span>
                         </div>
-                        <svg id="waveform" width="500" height="100"></svg>
-                        <div id="remaining-container">
+                        <svg id="waveform" width="400" height="48"></svg>
+                        <div id="remaining-container" class="waveform-time">
                             <span id="remaining-label">-0:00</span>
                         </div>
                     </div>
 
-                </div>
-                
+                <!-- </div> -->
+
 
 
 
                 <div id="player">
-                    
 
 
 
 
-                    <audio autoplay id="music-player">
-                      
 
+                    <audio preload="auto" id="music-player">
 
                     </audio>
-
-
-
 
 
                     <div class="playlist" id="playlist">
@@ -168,7 +165,6 @@
 
 
 <script>
-
 
     document.addEventListener('DOMContentLoaded', function () {
         const audioContext = new AudioContext();
@@ -244,10 +240,20 @@
             showWaveform();
         };
 
+        const pauseMusic = () => {
+            pauseSong();
+        };
+
         document.addEventListener('click', playMusic);
+        audio.addEventListener('pause', pauseMusic);
 
         draw();
+
+// play.onclick = function(){
+//     audioSource.start(0);
+// }
     });
+
 </script>
 
 </html>
