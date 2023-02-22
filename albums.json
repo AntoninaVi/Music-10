@@ -6,7 +6,7 @@
         "songs": [
             {
                 "title": "Aaron",
-                "src": "files/Berlin calling/Aaron.mp3",
+                "src": "files/Berlin Calling/aaron.mp3",
                 "duration": "6:00"
             },
             {
@@ -41,7 +41,7 @@
         "songs": [
             {
                 "title": "Böxig Leise",
-                "src": "files/Icke Wieder/Böxig_Leise.mp3",
+                "src": "files/Icke Wieder/boexig_leise.mp3",
                 "duration": "5:29"
             },
             {
