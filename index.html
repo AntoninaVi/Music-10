@@ -35,68 +35,68 @@
 
                 <div class="albums-container-albums" id="albums">
                     <h1 class="albums-title">Original Soundtrack</h1>
-                    <ul id="albumList">
-                        <div class="album" id="album1">
-                            <img src="img/Berlin-Calling.jpg" alt="album-cover" class="album-cover" id="album-cover">
+                    <div id="albumList">
+                        <div class="album">
+                            <img src="img/Berlin-Calling.jpg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Berlin Calling</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div class="album" id="album1">
-                            <img src="img/altes.png" alt="album-cover" class="album-cover" id="album-cover">
+                        <div class="album">
+                            <img src="img/altes.png" alt="album-cover" class="album-cover" >
                             <h2 class="album-title">Altes Kamuffel</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div class="album" id="album1">
+                        <div class="album">
                             <img src="img/icke.jpg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Icke Wieder</h2>
                             <h3 class="album-title__artist">Paul Kalkbrenner</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album">
                             <img src="img/prokofiev.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Best Works</h2>
                             <h3 class="album-title__artist">Sergey Prokofiev</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album">
                             <img src="img/rachmaninov.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Very Best of Rachmaninoff</h2>
                             <h3 class="album-title__artist">Sergey Rachmaninoff</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album">
                             <img src="img/Khachaturian.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Masquerade Waltz</h2>
                             <h3 class="album-title__artist">Aram Khachaturian</h3>
                         </div>
-                        <div class="album" id="album1">
+                        <div class="album">
                             <img src="img/haydn.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Best of Haydn</h2>
                             <h3 class="album-title__artist">Joseph Haydn</h3>
                         </div>
-                        <div class="album" id="album1">
+                        <div class="album">
                             <img src="img/chopin.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">The Best of Chopin</h2>
                             <h3 class="album-title__artist">Frédéric Chopin</h3>
                         </div>
-                        <div class="album" id="album1">
+                        <div class="album">
                             <img src="img/recondite.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Iffy</h2>
                             <h3 class="album-title__artist">Recondite</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album">
                             <img src="img/shxcxchcxsh.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Linear S Decoded</h2>
                             <h3 class="album-title__artist">shxcxchcxsh</h3>
                         </div>
-                        <div class="album" id="album2">
+                        <div class="album">
                             <img src="img/kohlstedt.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Tag Remixes</h2>
                             <h3 class="album-title__artist">Martin Kohlstedt</h3>
                         </div>
-                        <div class="album" id="album1">
+                        <div class="album">
                             <img src="img/lambert.jpeg" alt="album-cover" class="album-cover">
                             <h2 class="album-title">Open</h2>
                             <h3 class="album-title__artist">Lambert</h3>
                         </div>
-                    </ul>
+                    </div>
                 </div>
             </section>
 
@@ -122,6 +122,7 @@
                     <audio autoplay id="music-player">
                     </audio>
                     <div class="playlist" id="playlist">
+                        <button id="start-audio"></button>
                     </div>
                     <!-- <div class="waveform-song" id="waveform-song">
                         <div class="equalizer">
@@ -143,93 +144,93 @@
     // waveform
 
     document.addEventListener("DOMContentLoaded", function () {
-    const audioContext = new AudioContext();
+        const audioContext = new AudioContext();
 
-    const audio = document.getElementById("music-player");
-    const waveform = d3.select("#waveform");
-    const durationLabel = d3.select("#duration-label");
-    const remainingLabel = d3.select("#remaining-label");
+        const audio = document.getElementById("music-player");
+        const waveform = d3.select("#waveform");
+        const durationLabel = d3.select("#duration-label");
+        const remainingLabel = d3.select("#remaining-label");
 
-    let audioSource = null;
+        let audioSource = null;
 
-    if (audioSource) {
-        audioSource.disconnect();
-    }
+        if (audioSource) {
+            audioSource.disconnect();
+        }
 
-    audioSource = audioContext.createMediaElementSource(audio);
+        audioSource = audioContext.createMediaElementSource(audio);
 
-    const analyzer = audioContext.createAnalyser();
+        const analyzer = audioContext.createAnalyser();
 
-    audioSource.connect(analyzer);
-    analyzer.connect(audioContext.destination);
-    const bufferLength = analyzer.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+        audioSource.connect(analyzer);
+        analyzer.connect(audioContext.destination);
+        const bufferLength = analyzer.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
 
-    // D3
-    const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
-    const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
-    const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
-    const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
-    const draw = () => {
-        analyzer.getByteTimeDomainData(dataArray);
-        path.attr("d", line(dataArray));
-        requestAnimationFrame(draw);
-    };
+        // D3
+        const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
+        const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
+        const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
+        const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
+        const draw = () => {
+            analyzer.getByteTimeDomainData(dataArray);
+            path.attr("d", line(dataArray));
+            requestAnimationFrame(draw);
+        };
 
-    audio.onloadedmetadata = () => {
-        const duration = Math.floor(audio.duration);
-        const remaining = Math.floor(audio.duration);
-        durationLabel.text(formatTime(duration));
-        remainingLabel.text(formatTime(remaining));
-    }
+        audio.onloadedmetadata = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration);
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
 
-    audio.ontimeupdate = () => {
-        const duration = Math.floor(audio.duration);
-        const remaining = Math.floor(audio.duration - audio.currentTime);
-        durationLabel.text(formatTime(duration));
-        remainingLabel.text(formatTime(remaining));
-    }
+        audio.ontimeupdate = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration - audio.currentTime);
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
 
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds - minutes * 60;
-        const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-        return `${minutes}:${formattedSeconds}`;
-    }
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds - minutes * 60;
+            const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+            return `${minutes}:${formattedSeconds}`;
+        }
 
-    xScale.domain([0, bufferLength]);
-    yScale.domain([0, 255]);
+        xScale.domain([0, bufferLength]);
+        yScale.domain([0, 255]);
 
-    waveform.style("display", "none");
-    durationLabel.style("display", "none");
-    remainingLabel.style("display", "none");
+        waveform.style("display", "none");
+        durationLabel.style("display", "none");
+        remainingLabel.style("display", "none");
 
-    const showWaveform = () => {
-        waveform.style("display", "block");
-        durationLabel.style("display", "inline-block");
-        remainingLabel.style("display", "inline-block");
-    };
-    const playMusic = () => {
-        audio.play();
+        const showWaveform = () => {
+            waveform.style("display", "block");
+            durationLabel.style("display", "inline-block");
+            remainingLabel.style("display", "inline-block");
+        };
+        const playMusic = () => {
+            audio.play();
+            draw();
+            showWaveform();
+        };
+
+        audio.addEventListener('canplay', playMusic);
+
+        const pauseMusic = () => {
+            pauseSong();
+        };
+
+        document.addEventListener('click', playMusic);
+        audio.addEventListener('pause', pauseMusic);
         draw();
-        showWaveform();
-    };
-
-    audio.addEventListener('canplay', playMusic);
-
-    const pauseMusic = () => {
-        pauseSong();
-    };
-
-    document.addEventListener('click', playMusic);
-    audio.addEventListener('pause', pauseMusic);
-    draw();
     });
 
 
     document.getElementById("start-audio").addEventListener("click", function () {
         audioContext.resume().then(() => {
-            console.log("Audio context resumed successfully");
+            console.log("Audio context resumed");
         });
     });
 </script>
