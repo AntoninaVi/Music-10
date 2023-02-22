@@ -101,6 +101,7 @@ fetch('albums.json')
             (song) =>
               `<li class="playsong-li"> 
               <div class="playsong-waveform"></div>
+        
               <a class="playsong-link" href="#" 
                   data-song-title="${song.title}" 
                   data-song-src="${song.src}" 
