@@ -11,12 +11,12 @@
             },
             {
                 "title": "Absynthe",
-                "src": "files/Berlin calling/absynthe.mp3",
+                "src": "files/Berlin Calling/absynthe.mp3",
                 "duration": "5:37"
             },
             {
                 "title": "Queer Fellow",
-                "src": "files/Berlin calling/queer_fellow.mp3",
+                "src": "files/Berlin Callingqueer_fellow.mp3",
                 "duration": "4:16"
             }
 
@@ -145,7 +145,7 @@
         "songs": [
             {
                 "title": "Monolithic Conclusion",
-                "src": "files/SHXCXCHCXSH/Monolithic Conclusion.mp3",
+                "src": "files/Shxcxchcxsh/monolithic_conclusion.mp3",
                 "duration": "4:49"
             }
         ]
