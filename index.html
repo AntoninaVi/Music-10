@@ -140,6 +140,7 @@
 <script>
     // waveform
     document.addEventListener("DOMContentLoaded", function () {
+
         const audioContext = new AudioContext();
 
         const audio = document.getElementById("music-player");
@@ -221,14 +222,16 @@
         document.addEventListener('click', playMusic);
         audio.addEventListener('pause', pauseMusic);
         draw();
+
+
     });
 
-
-    document.getElementById("start-audio").addEventListener("click", function () {
+    document.getElementById("#start-audio").addEventListener("click", function () {
         audioContext.resume().then(() => {
             console.log("Audio context resumed");
         });
     });
+
 </script>
 
 </html>
