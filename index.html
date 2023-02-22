@@ -140,7 +140,7 @@
 </body>
 <script>
     // waveform
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("click", function() {
         const audioContext = new AudioContext();
 
         const audio = document.getElementById("music-player");
@@ -200,7 +200,6 @@
             durationLabel.style("display", "inline-block");
             remainingLabel.style("display", "inline-block");
         };
-        
         const playMusic = () => {
             audio.play();
             draw();

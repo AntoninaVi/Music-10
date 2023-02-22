@@ -29,7 +29,7 @@ fetch('albums.json')
     albumElements.forEach((albumElement, index) => {
       albumElement.addEventListener("click", () => {
         currentAlbum = albums[index];
-        songTitle.innerHTML = currentAlbum.songs[0].title;
+        // songTitle.innerHTML = currentAlbum.songs[0].title;
         player.src = currentAlbum.songs[0].src;
         player.play();
         displayPlaylist(index);
