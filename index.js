@@ -12,16 +12,15 @@ fetch('albums.json')
     let currentAlbum = albums[0];
 
     const displayAlbums = (albums = []) => {
-
+      const albumList = document.querySelector("#album-list");
       albumList.innerHTML = "";
       for (const albumKey in albums) {
         const album = albums[albumKey];
-        albumList.innerHTML += `
-          <div class="album" data-album="${albumKey}">
-            ${album.title} ${album.artist}
-          </div>
-        `;
-
+        const albumElement = document.createElement("div");
+        albumElement.classList.add("album");
+        albumElement.setAttribute("data-album", albumKey);
+        albumElement.innerHTML = `${album.title} ${album.artist}`;
+        albumList.appendChild(albumElement);
       }
     };
 
@@ -119,9 +118,10 @@ fetch('albums.json')
 
 
 
+
     albums.forEach((album, index) => {
       currentAlbum = albums[index];
-      const song = document.querySelectorAll('song');
+      // const song = document.querySelectorAll('song');
       const playlist = document.createElement("div");
       playlist.classList.add("playlist");
       playlist.id = `playlist-${index}`;
@@ -142,7 +142,7 @@ fetch('albums.json')
           ${album.songs
           .map(
             (song) =>
-              `<li class="playsong-li"> 
+              `<li id="songLi" class="playsong-li"> 
           <div class="waveform-equalizer">
          
           </div>
@@ -170,6 +170,8 @@ fetch('albums.json')
 
 
     //search
+
+
     const searchInput = document.getElementById("search-input");
     const searchAlbum = () => {
       const searchValue = searchInput.value.toLowerCase();
@@ -188,7 +190,21 @@ fetch('albums.json')
     };
     const searchButton = document.getElementById('search-button');
     searchButton.addEventListener("click", searchAlbum);
+
+    searchInput.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        searchButton.click();
+      }
+    })
   });
+
+
+
+
+
+
+
 
 
 // play and pause song when clicked
