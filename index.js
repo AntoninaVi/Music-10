@@ -25,8 +25,6 @@ fetch('albums.json')
     };
 
 
-
-
     albumElements.forEach((albumElement, index) => {
       albumElement.addEventListener("click", () => {
         currentAlbum = albums[index];
@@ -70,53 +68,18 @@ fetch('albums.json')
         const songLi = song.closest(".playsong-li");
 
         songLi.addEventListener("mouseover", () => {
-
-          if (!isPlaying) {
-            toggleEqualizer(isPlaying, songLi);
-          }
           // show play button on hover
           songLi.appendChild(playButton);
         });
 
         songLi.addEventListener("mouseleave", () => {
 
-          if (!isPlaying) {
-            toggleEqualizer(isPlaying, songLi);
-          }
           // remove play button on mouseleave
           songLi.removeChild(playButton);
         });
 
       });
     };
-
-    function toggleEqualizer(isPlaying, songLi) {
-      const equalizer = songLi.querySelector("#equalizer");
-      if (isPlaying) {
-        // hide equalizer animation when playing
-        if (equalizer) {
-          equalizer.style.display = "none";
-        }
-      } else {
-        // show equalizer animation when not playing
-        if (equalizer) {
-          equalizer.style.display = "flex";
-        } else {
-          const waveformEl = songLi.querySelector(".waveform-equalizer");
-          waveformEl.innerHTML += `
-            <div id="equalizer">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-            </div>
-          `;
-        }
-      }
-    }
-
-
-
 
 
     albums.forEach((album, index) => {
@@ -143,8 +106,8 @@ fetch('albums.json')
           .map(
             (song) =>
               `<li id="songLi" class="playsong-li"> 
-          <div class="waveform-equalizer">
-         
+              <div class="waveform-song" id="waveform-song">
+              
           </div>
               <a class="playsong-link" href="#" 
                   data-song-title="${song.title}" 
@@ -167,12 +130,12 @@ fetch('albums.json')
     });
 
 
-
-
     //search
 
-
+    const albumContainer = document.getElementById('album-container')
     const searchInput = document.getElementById("search-input");
+
+
     const searchAlbum = () => {
       const searchValue = searchInput.value.toLowerCase();
       const filteredAlbums = albums.filter(album =>
@@ -182,12 +145,29 @@ fetch('albums.json')
 
       if (filteredAlbums.length > 0) {
         currentAlbum = filteredAlbums[0];
-        // songTitle.innerHTML = currentAlbum.songs[0].title;
         player.src = currentAlbum.songs[0].src;
         player.play();
+
+        // clear current albums from container
+        albumContainer.innerHTML = "";
+
+        // display searched album
+        const albumDiv = document.createElement("div");
+        albumDiv.className = "album";
+        albumDiv.innerHTML = `
+      <img src="${currentAlbum.cover}" alt="${currentAlbum.name}" />
+      <div class="album-info">
+        <h2>${currentAlbum.name}</h2>
+        <p>${currentAlbum.artist}</p>
+      </div>
+    `;
+        albumContainer.appendChild(albumDiv);
+
+        // display playlist for searched album
         displayPlaylist(albums.indexOf(currentAlbum));
       }
     };
+
     const searchButton = document.getElementById('search-button');
     searchButton.addEventListener("click", searchAlbum);
 
@@ -196,18 +176,10 @@ fetch('albums.json')
         event.preventDefault();
         searchButton.click();
       }
-    })
+    });
   });
+let isPlaying = false;
 
-
-
-
-
-
-
-
-
-// play and pause song when clicked
 function playSong(title, src, playlist) {
   const player = document.querySelector("#music-player");
 
@@ -218,27 +190,69 @@ function playSong(title, src, playlist) {
   player.src = src;
 
   const waveform = playlist.querySelector("#waveform");
+  const equalizer = document.querySelector("#equalizer");
+
+  // remove equalizer from  previously playing song
+  const prevPlayingSong = document.querySelector(".song-li.playing");
+  if (prevPlayingSong) {
+    const prevEqualizer = prevPlayingSong.querySelector("equalizer");
+    if (prevEqualizer) {
+      prevEqualizer.style.display = "none";
+    }
+  }
+  equalizer.style.display = "flex";
 
   player.addEventListener("timeupdate", () => {
     const progress = player.currentTime / player.duration;
     waveform.style.width = `${progress * 100}%`;
+    equalizer.style.display = `${progress * 100}%`;
   });
 
   player.addEventListener("canplaythrough", () => {
     isPlaying = true;
 
     player.play();
+    equalizer.style.display = "flex";
+
+  });
+
+  player.addEventListener("pause", () => {
+    isPlaying = false;
+    equalizer.style.display = "none";
+
+  });
+
+  playlist.addEventListener("mouseenter", () => {
+    if (isPlaying) {
+      equalizer.style.display = "none";
+    }
+  });
+
+  playlist.addEventListener("mouseleave", () => {
+    if (isPlaying) {
+      equalizer.style.display = "flex";
+    }
   });
 }
 
 function pauseSong() {
   const player = document.querySelector("#music-player");
+  const equalizer = document.querySelector(".equalizer");
 
   isPlaying = false;
-
   player.pause();
-
+  equalizer.style.display = "none";
 }
+
+
+
+
+
+// function pauseSong() {
+//   const player = document.querySelector("#music-player");
+//   isPlaying = false;
+//   player.pause();
+// }
 
 
 

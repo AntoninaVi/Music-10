@@ -35,6 +35,7 @@
 
                 <div class="albums-container-albums" id="albums">
                     <h1 class="albums-title">Original Soundtrack</h1>
+                    <div id="album-container"></div>
                     <div id="albumList">
                         <div class="album">
                             <img src="img/Berlin-Calling.jpg" alt="album-cover" class="album-cover">
@@ -98,6 +99,8 @@
                         </div>
                     </div>
                 </div>
+                <div id="search-results"></div>
+
             </section>
 
             <section id="playlistContainer" class="player-container">
@@ -119,14 +122,15 @@
 
                     <audio autoplay id="music-player">
                     </audio>
-                    <!-- <div class="waveform-song" id="waveform-song">
-                        <div class="equalizer">
+                    <li id="songLi" class="playsong-li"> 
+                    <div class="waveform-song" id="waveform-song">
+                        <div id="equalizer" class="equalizer">
                             <div class="bar"></div>
                             <div class="bar"></div>
                             <div class="bar"></div>
                             <div class="bar"></div>
                         </div>
-                    </div> -->
+                    </div></li>
                     <div class="playlist" id="playlist">
 
                     </div>
