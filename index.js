@@ -8,13 +8,12 @@ fetch('albums.json')
     const songTitle = document.querySelector("#song-title");
     const playlistElements = [];
     // const albumArtist = document.getElementsByClassName("album-title__artist");
-
     let currentAlbum = albums[0];
 
     const displayAlbums = (albums = []) => {
       const albumList = document.querySelector("#album-list");
       albumList.innerHTML = "";
-      for (const albumKey in albums) {
+      for (const albumKey of albums) {
         const album = albums[albumKey];
         const albumElement = document.createElement("div");
         albumElement.classList.add("album");
@@ -23,7 +22,6 @@ fetch('albums.json')
         albumList.appendChild(albumElement);
       }
     };
-
 
     albumElements.forEach((albumElement, index) => {
       albumElement.addEventListener("click", () => {
@@ -34,6 +32,7 @@ fetch('albums.json')
         displayPlaylist(index);
       });
     });
+
     const displayPlaylist = (index) => {
       playlistElements.forEach((playlist) => {
         playlist.style.display = "none";
@@ -45,46 +44,50 @@ fetch('albums.json')
       playlist.style.display = "block";
 
       const songs = playlist.querySelectorAll(".playsong-link");
-      // const player = document.querySelector("#music-player");
       let isPlaying = false;
 
       songs.forEach((song) => {
-        const playButton = document.createElement("button");
-        playButton.classList.add("play-button");
-        playButton.innerHTML = '<i class="fas fa-play"></i>';
+        // check if button already exists
+        const playButton = song.querySelector(".play-button");
+        if (!playButton) {
+          // create button if it doesn't exist
+          const newPlayButton = document.createElement("button");
+          newPlayButton.classList.add("play-button");
+          newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+          song.appendChild(newPlayButton);
 
-       
+          newPlayButton.addEventListener("click", () => {
+            if (!isPlaying) {
+              isPlaying = true;
+              newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
+              playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
+              songLi.appendChild(equalizer);
+            } else {
+              isPlaying = false;
+              newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+              pauseSong(player);
+            }
+          });
+          const songLi = song.closest(".playsong-li");
+          songLi.addEventListener("mouseover", () => {
+            // show play button on hover
+            const playButton = songLi.querySelector(".play-button");
+            if (playButton) {
+              playButton.style.display = "block";
+            }
 
-        playButton.addEventListener("click", () => {
-          if (!isPlaying) {
-            isPlaying = true;
-            playButton.innerHTML = '<i class="fas fa-pause"></i>';
-            playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
-            songLi.appendChild(equalizer);
-          } else {
-            isPlaying = false;
-            playButton.innerHTML = '<i class="fas fa-play"></i>';
-            pauseSong(player);
-            
-          }
-        });
+          });
 
-        const songLi = song.closest(".playsong-li");
-
-        songLi.addEventListener("mouseover", () => {
-          // show play button on hover
-          songLi.appendChild(playButton);
-        });
-
-        songLi.addEventListener("mouseleave", () => {
-
-          // remove play button on mouseleave
-          songLi.removeChild(playButton);
-        });
-
+          songLi.addEventListener("mouseleave", () => {
+            // hide play button on mouseleave
+            const playButton = songLi.querySelector(".play-button");
+            if (playButton) {
+              playButton.style.display = "none";
+            }
+          });
+        }
       });
     };
-
 
     albums.forEach((album, index) => {
       currentAlbum = albums[index];
@@ -247,85 +250,6 @@ function pauseSong() {
   player.pause();
   equalizer.style.display = "none";
 }
-
-
-
-
-
-// function pauseSong() {
-//   const player = document.querySelector("#music-player");
-//   isPlaying = false;
-//   player.pause();
-// }
-
-
-
-
-
-// OK to change
-// const player = document.querySelector("#music-player");
-// const equalizer = document.querySelector(".equalizer");
-// const songTitle = document.querySelector("#song-title");
-// const albumList = document.querySelector("#album-list");
-
-// function toggleEqualizer(show) {
-//   equalizer.style.display = show ? "flex" : "none";
-// }
-// function playSong(title, src, playlist) {
-//   songTitle.textContent = title;
-//   player.src = src;
-//   toggleEqualizer(true);
-//   player.play();
-// }
-// function pauseSong() {
-//   toggleEqualizer(false);
-//   player.pause();
-// }
-// player.addEventListener("play", () => {
-//   toggleEqualizer(true);
-//   });
-//   player.addEventListener("pause", () => {
-//   toggleEqualizer(false);
-//   });
-
-//   albumList.addEventListener("click", (event) => {
-//     const albumElement = event.target.closest(".album");
-//     if (albumElement) {
-//     const albumIndex = albumElement.dataset.album;
-//     const album = albums[albumIndex];
-//     playSong(album.songs[0].title, album.songs[0].src);
-//     }
-//     });
-
-
-//     const playlistElements = document.querySelectorAll(".playlist");
-//     playlistElements.forEach((playlist) => {
-//     playlist.addEventListener("click", (event) => {
-//     const playButton = event.target.closest(".play-button");
-//     const songElement = event.target.closest(".playsong-link");
-//     if (playButton) {
-//     if (player.paused) {
-//     playButton.innerHTML = '<i class="fas fa-pause"></i>';
-//     playSong(songElement.dataset.songTitle, songElement.dataset.songSrc, playlist);
-//     } else {
-//     playButton.innerHTML = '<i class="fas fa-play"></i>';
-//     pauseSong();
-//     }
-//     }
-//     });
-//     playlist.addEventListener("mouseover", (event) => {
-//     if (!player.paused) {
-//     toggleEqualizer(false);
-//     }
-//     });
-//     playlist.addEventListener("mouseout", (event) => {
-//     if (!player.paused) {
-//     toggleEqualizer(true);
-//     }
-//     });
-//     });    
-
-
 
 
 
