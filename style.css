@@ -30,6 +30,7 @@ body {
           align-items: center;
   max-width: 1360px;
   width: 100%;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   border-radius: 22px;
@@ -37,12 +38,8 @@ body {
 }
 
 .albums-container {
-  position: relative;
-  left: 1em;
   background: #ffffff;
   border-radius: 22px;
-  -ms-flex-preferred-size: 75%;
-      flex-basis: 75%;
   max-width: 60rem;
   width: 100%;
   border-radius: 22px;
@@ -53,7 +50,7 @@ body {
 }
 
 .header {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 .header__navigation {
   display: -webkit-box;
@@ -121,17 +118,17 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 55em;
   padding-top: 1.5em;
   border-radius: 0 22px 22px 0;
   max-width: 29.9em;
   width: 90%;
-  padding: 1.5em 1.5em;
+  padding: 1em 1em;
 }
 
 #playlist {
   position: relative;
-  left: 1em;
+  left: 0.7em;
   top: -2em;
 }
 
@@ -425,4 +422,8 @@ ol .playsong-li::marker {
   to {
     height: 18px;
   }
+}
+.album-container {
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2);
 }

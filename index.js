@@ -136,7 +136,7 @@ fetch('albums.json')
 
     //search
 
-    const albumContainer = document.getElementById('album-container')
+    // const albumContainer = document.getElementById('album-container')
     const searchInput = document.getElementById("search-input");
 
 
@@ -153,7 +153,7 @@ fetch('albums.json')
         player.play();
 
         // clear current albums from container
-        albumContainer.innerHTML = "";
+        // albumContainer.innerHTML = "";
 
         // display searched album
         const albumDiv = document.createElement("div");
@@ -165,7 +165,7 @@ fetch('albums.json')
         <p>${currentAlbum.artist}</p>
       </div>
     `;
-        albumContainer.appendChild(albumDiv);
+        // albumContainer.appendChild(albumDiv);
 
         // display playlist for searched album
         displayPlaylist(albums.indexOf(currentAlbum));
