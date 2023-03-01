@@ -358,9 +358,9 @@ ol .playsong-li::marker {
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-    position: absolute;
-    top: -0.9vw;
-    left: 0.3vw;
+    position: relative;
+    top: -2.3vh;
+    left: 0;
     display: none;
 }
 
@@ -371,13 +371,13 @@ ol .playsong-li::marker {
 .song.playing:hover .equalizer.active {
     display: none;
 }
-.song-li .equalizer {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-}
+// .song-li .equalizer {
+//     display: none;
+//     position: absolute;
+//     top: 50%;
+//     left: 20px;
+//     transform: translateY(-50%);
+// }
 
 .song-li.active .equalizer {
     display: flex;

@@ -53,15 +53,19 @@ fetch('albums.json')
         playButton.classList.add("play-button");
         playButton.innerHTML = '<i class="fas fa-play"></i>';
 
+       
+
         playButton.addEventListener("click", () => {
           if (!isPlaying) {
             isPlaying = true;
             playButton.innerHTML = '<i class="fas fa-pause"></i>';
             playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
+            songLi.appendChild(equalizer);
           } else {
             isPlaying = false;
             playButton.innerHTML = '<i class="fas fa-play"></i>';
             pauseSong(player);
+            
           }
         });
 
