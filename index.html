@@ -104,7 +104,7 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
-                <button class="play-button"></button>
+                <button onclick="play()" class="play-button"></button>
                 <h3 id="song-title">
                 </h3>
 
@@ -122,15 +122,16 @@
 
                     <audio autoplay id="music-player">
                     </audio>
-                    <li id="songLi" class="playsong-li"> 
-                    <div class="waveform-song" id="waveform-song">
-                        <div id="equalizer" class="equalizer">
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
+                    <li id="songLi" class="playsong-li">
+                        <div class="waveform-song" id="waveform-song">
+                            <div id="equalizer" class="equalizer">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
                         </div>
-                    </div></li>
+                    </li>
                     <div class="playlist" id="playlist">
 
                     </div>
@@ -146,183 +147,100 @@
 
 <script>
     // waveform
+    let audioCtx;
 
-    document.addEventListener("DOMContentLoaded", function () {
-
-        const audioContext = new AudioContext();
-
-        const audio = document.getElementById("music-player");
-        const waveform = d3.select("#waveform");
-        const durationLabel = d3.select("#duration-label");
-        const remainingLabel = d3.select("#remaining-label");
-
-        let audioSource = null;
-
-        if (audioSource) {
-            audioSource.disconnect();
+    function play() {
+        if (!audioCtx) {
+            audioCtx = new AudioContext();
         }
+        document.addEventListener("DOMContentLoaded", function () {
 
-        audioSource = audioContext.createMediaElementSource(audio);
+            const audioContext = new AudioContext();
 
-        const analyzer = audioContext.createAnalyser();
+            const audio = document.getElementById("music-player");
+            const waveform = d3.select("#waveform");
+            const durationLabel = d3.select("#duration-label");
+            const remainingLabel = d3.select("#remaining-label");
 
-        audioSource.connect(analyzer);
-        analyzer.connect(audioContext.destination);
-        const bufferLength = analyzer.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
+            let audioSource = null;
 
-        // D3
-        const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
-        const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
-        const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
-        const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
-        const draw = () => {
-            analyzer.getByteTimeDomainData(dataArray);
-            path.attr("d", line(dataArray));
-            requestAnimationFrame(draw);
-        };
+            if (audioSource) {
+                audioSource.disconnect();
+            }
 
-        audio.onloadedmetadata = () => {
-            const duration = Math.floor(audio.duration);
-            const remaining = Math.floor(audio.duration);
-            durationLabel.text(formatTime(duration));
-            remainingLabel.text(formatTime(remaining));
-        }
+            audioSource = audioContext.createMediaElementSource(audio);
 
-        audio.ontimeupdate = () => {
-            const duration = Math.floor(audio.duration);
-            const remaining = Math.floor(audio.duration - audio.currentTime);
-            durationLabel.text(formatTime(duration));
-            remainingLabel.text(formatTime(remaining));
-        }
+            const analyzer = audioContext.createAnalyser();
 
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds - minutes * 60;
-            const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-            return `${minutes}:${formattedSeconds}`;
-        }
+            audioSource.connect(analyzer);
+            analyzer.connect(audioContext.destination);
+            const bufferLength = analyzer.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
 
-        xScale.domain([0, bufferLength]);
-        yScale.domain([0, 255]);
+            // D3
+            const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
+            const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
+            const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
+            const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
+            const draw = () => {
+                analyzer.getByteTimeDomainData(dataArray);
+                path.attr("d", line(dataArray));
+                requestAnimationFrame(draw);
+            };
 
-        waveform.style("display", "none");
-        durationLabel.style("display", "none");
-        remainingLabel.style("display", "none");
+            audio.onloadedmetadata = () => {
+                const duration = Math.floor(audio.duration);
+                const remaining = Math.floor(audio.duration);
+                durationLabel.text(formatTime(duration));
+                remainingLabel.text(formatTime(remaining));
+            }
 
-        const showWaveform = () => {
-            waveform.style("display", "block");
-            durationLabel.style("display", "inline-block");
-            remainingLabel.style("display", "inline-block");
-        };
-        const playMusic = () => {
-            audio.play();
+            audio.ontimeupdate = () => {
+                const duration = Math.floor(audio.duration);
+                const remaining = Math.floor(audio.duration - audio.currentTime);
+                durationLabel.text(formatTime(duration));
+                remainingLabel.text(formatTime(remaining));
+            }
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds - minutes * 60;
+                const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+                return `${minutes}:${formattedSeconds}`;
+            }
+
+            xScale.domain([0, bufferLength]);
+            yScale.domain([0, 255]);
+
+            waveform.style("display", "none");
+            durationLabel.style("display", "none");
+            remainingLabel.style("display", "none");
+
+            const showWaveform = () => {
+                waveform.style("display", "block");
+                durationLabel.style("display", "inline-block");
+                remainingLabel.style("display", "inline-block");
+            };
+            const playMusic = () => {
+                audio.play();
+                draw();
+                showWaveform();
+            };
+
+            audio.addEventListener('canplay', playMusic);
+
+            const pauseMusic = () => {
+                pauseSong();
+            };
+
+            document.addEventListener('click', playMusic);
+            audio.addEventListener('pause', pauseMusic);
             draw();
-            showWaveform();
-        };
-
-        audio.addEventListener('canplay', playMusic);
-
-        const pauseMusic = () => {
-            pauseSong();
-        };
-
-        document.addEventListener('click', playMusic);
-        audio.addEventListener('pause', pauseMusic);
-        draw();
 
 
-    });
+        });
 
-// // get the audio player element and create a new audio context
-// const player = document.querySelector('#music-player');
-// const audioContext = new AudioContext();
-// const source = audioContext.createMediaElementSource(player);
-
-// // create the equalizer animation
-// const equalizer = document.createElement('div');
-// equalizer.classList.add('equalizer');
-// for (let i = 0; i < 5; i++) {
-//   const bar = document.createElement('div');
-//   bar.classList.add('bar');
-//   equalizer.appendChild(bar);
-// }
-
-// // get the current playing song element and replace its play button with the equalizer animation
-// function showEqualizer(songElement) {
-//   const playButton = songElement.querySelector('.play-button');
-//   if (playButton) {
-//     songElement.removeChild(playButton);
-//     songElement.appendChild(equalizer);
-//   }
-// }
-
-// // remove the equalizer animation from the current playing song element
-// function hideEqualizer(songElement) {
-//   const isHovered = songElement.matches(':hover');
-//   const hasEqualizer = songElement.contains(equalizer);
-//   if (!isHovered && hasEqualizer) {
-//     songElement.removeChild(equalizer);
-//     songElement.appendChild(document.createElement('button')).classList.add('play-button');
-//   }
-// }
-
-// // hide the equalizer animation when the audio is paused or ended
-// function hideEqualizerOnPause() {
-//   const songElement = document.querySelector('.playsong-li.playing');
-//   if (songElement) {
-//     const isPaused = player.paused || player.ended;
-//     if (isPaused) {
-//       hideEqualizer(songElement);
-//       songElement.classList.remove('playing');
-//     }
-//   }
-// }
-
-// // update the current playing song element and show/hide the equalizer animation accordingly
-// function updatePlayingSong(songElement) {
-//   const isPlaying = !player.paused && !player.ended;
-//   const isSameSong = songElement === document.querySelector('.playsong-li.playing');
-//   if (isPlaying && !isSameSong) {
-//     const playingSongElement = document.querySelector('.playsong-li.playing');
-//     if (playingSongElement) {
-//       hideEqualizer(playingSongElement);
-//       playingSongElement.classList.remove('playing');
-//     }
-//     showEqualizer(songElement);
-//     songElement.classList.add('playing');
-//   } else if (!isPlaying && isSameSong) {
-//     hideEqualizer(songElement);
-//     songElement.classList.remove('playing');
-//   }
-// }
-
-// // update the playing song element and hide the equalizer animation when the audio is paused or ended
-// player.addEventListener('pause', hideEqualizerOnPause);
-// player.addEventListener('ended', hideEqualizerOnPause);
-
-// // attach the show/hide equalizer functions to the song elements
-// const songElements = document.querySelectorAll('.playsong-li');
-// songElements.forEach(songElement => {
-//   songElement.addEventListener('click', () => {
-//     updatePlayingSong(songElement);
-//   });
-//   songElement.addEventListener('mouseover', () => {
-//     const songIsPlaying = songElement.classList.contains('playing');
-//     if (!songIsPlaying) {
-//       hideEqualizer(songElement);
-//     }
-//   });
-//   songElement.addEventListener('mouseleave', () => {
-//     const songIsPlaying = songElement.classList.contains('playing');
-//     if (!songIsPlaying) {
-//       showEqualizer(songElement);
-//     }
-//   });
-// });
-
-
-
+    }
 </script>
 
 </html>

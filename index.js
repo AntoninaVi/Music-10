@@ -138,7 +138,6 @@ fetch('albums.json')
 
 
     //search
-
     // const albumContainer = document.getElementById('album-container')
     const searchInput = document.getElementById("search-input");
 
@@ -241,6 +240,7 @@ function playSong(title, src, playlist) {
     }
   });
 }
+
 
 function pauseSong() {
   const player = document.querySelector("#music-player");
