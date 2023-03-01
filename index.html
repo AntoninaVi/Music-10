@@ -104,7 +104,7 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
-                <button onclick="play()" class="play-button"></button>
+                <button class="play-button"></button>
                 <h3 id="song-title">
                 </h3>
 
@@ -147,14 +147,10 @@
 
 <script>
     // waveform
-    let audioCtx;
 
-    function play() {
-        if (!audioCtx) {
-            audioCtx = new AudioContext();
-        }
-        document.addEventListener("DOMContentLoaded", function () {
-
+    document.addEventListener("DOMContentLoaded", function () {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        window.addEventListener("click", function () {
             const audioContext = new AudioContext();
 
             const audio = document.getElementById("music-player");
@@ -236,11 +232,11 @@
             document.addEventListener('click', playMusic);
             audio.addEventListener('pause', pauseMusic);
             draw();
-
-
+            audioCtx.resume();
         });
+    });
 
-    }
+
 </script>
 
 </html>
