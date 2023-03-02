@@ -148,89 +148,92 @@
 <script>
     // waveform
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
+
         const audioContext = new AudioContext();
-        audioContext.resume().then(() => {
 
-            const audio = document.getElementById("music-player");
-            const waveform = d3.select("#waveform");
-            const durationLabel = d3.select("#duration-label");
-            const remainingLabel = d3.select("#remaining-label");
+        const audio = document.getElementById("music-player");
+        const waveform = d3.select("#waveform");
+        const durationLabel = d3.select("#duration-label");
+        const remainingLabel = d3.select("#remaining-label");
 
-            let audioSource = null;
+        let audioSource = null;
+        let analyzer = null;
 
+        function createSource() {
             if (audioSource) {
                 audioSource.disconnect();
             }
             audioSource = audioContext.createMediaElementSource(audio);
-
-            const analyzer = audioContext.createAnalyser();
-
+            analyzer = audioContext.createAnalyser();
             audioSource.connect(analyzer);
             analyzer.connect(audioContext.destination);
-            const bufferLength = analyzer.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
+        }
 
-            // D3
-            const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
-            const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
-            const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
-            const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
-            const draw = () => {
-                analyzer.getByteTimeDomainData(dataArray);
-                path.attr("d", line(dataArray));
-                requestAnimationFrame(draw);
-            };
+        createSource();
 
-            audio.onloadedmetadata = () => {
-                const duration = Math.floor(audio.duration);
-                const remaining = Math.floor(audio.duration);
-                durationLabel.text(formatTime(duration));
-                remainingLabel.text(formatTime(remaining));
-            }
+        const bufferLength = analyzer.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
 
-            audio.ontimeupdate = () => {
-                const duration = Math.floor(audio.duration);
-                const remaining = Math.floor(audio.duration - audio.currentTime);
-                durationLabel.text(formatTime(duration));
-                remainingLabel.text(formatTime(remaining));
-            }
+        // D3
+        const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
+        const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
+        const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
+        const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
+        const draw = () => {
+            analyzer.getByteTimeDomainData(dataArray);
+            path.attr("d", line(dataArray));
+            requestAnimationFrame(draw);
+        };
 
-            function formatTime(seconds) {
-                const minutes = Math.floor(seconds / 60);
-                const remainingSeconds = seconds - minutes * 60;
-                const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-                return `${minutes}:${formattedSeconds}`;
-            }
+        audio.onloadedmetadata = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration);
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
 
-            xScale.domain([0, bufferLength]);
-            yScale.domain([0, 255]);
+        audio.ontimeupdate = () => {
+            const duration = Math.floor(audio.duration);
+            const remaining = Math.floor(audio.duration - audio.currentTime);
+            durationLabel.text(formatTime(duration));
+            remainingLabel.text(formatTime(remaining));
+        }
 
-            waveform.style("display", "none");
-            durationLabel.style("display", "none");
-            remainingLabel.style("display", "none");
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds - minutes * 60;
+            const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+            return `${minutes}:${formattedSeconds}`;
+        }
 
-            const showWaveform = () => {
-                waveform.style("display", "block");
-                durationLabel.style("display", "inline-block");
-                remainingLabel.style("display", "inline-block");
-            };
-            const playMusic = () => {
-                audio.play();
-                draw();
-                showWaveform();
-            };
+        xScale.domain([0, bufferLength]);
+        yScale.domain([0, 255]);
 
-            audio.addEventListener('canplay', playMusic);
+        waveform.style("display", "none");
+        durationLabel.style("display", "none");
+        remainingLabel.style("display", "none");
 
-            const pauseMusic = () => {
-                pauseSong();
-            };
-
-            document.addEventListener('click', playMusic);
-            audio.addEventListener('pause', pauseMusic);
+        const showWaveform = () => {
+            waveform.style("display", "block");
+            durationLabel.style("display", "inline-block");
+            remainingLabel.style("display", "inline-block");
+        };
+        const playMusic = () => {
+            audio.play();
             draw();
-        });
+            showWaveform();
+        };
+
+        audio.addEventListener('canplay', playMusic);
+
+        const pauseMusic = () => {
+            pauseSong();
+        };
+
+        document.addEventListener('click', playMusic);
+        audio.addEventListener('pause', pauseMusic);
+        draw();
     });
 
 
