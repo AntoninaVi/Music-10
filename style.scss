@@ -10,41 +10,59 @@
 
 body {
     font-family: "PT Root UI Web", sans-serif;
-    @media screen and (min-width: 1250px) {
+    overflow-x: hidden;
+    @media screen and (min-width: 1300px) {
         overflow: hidden;
     }
 }
 .container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 68% 32%;
     align-items: center;
+    justify-content: center;
     max-width: 1360px;
     width: 100%;
     min-height: 100vh;
+    padding: 0.5em 0.5em;
     margin-left: auto;
     margin-right: auto;
     border-radius: 22px;
     padding-bottom: 2em;
+    @media screen and (max-width: 1280px) {
+        grid-template-columns: 55% 40%;
+    }
+    @media screen and (max-width: 1170px) {
+        grid-template-columns: 57% 43%;
+    }
+    @media screen and (max-width: 1024px) {
+        grid-template-columns: 50% 48%;
+    }
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .albums-container {
     background: #ffffff;
     border-radius: 22px;
-    // flex-basis: 75%;
     max-width: 60rem;
     width: 100%;
     border-radius: 22px;
-
-    &-container-albums {
-        display: grid;
+}
+.albums-title {
+    @media screen and (max-width: 768px) {
+        display: none;
     }
 }
-
 .header {
     margin-bottom: 1em;
     &__navigation {
         display: flex;
         justify-content: space-between;
+        @media screen and (max-width: 1280px) {
+            justify-content: space-evenly;
+        }
     }
 
     &__navigation-search {
@@ -58,9 +76,22 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     column-gap: 2em;
     row-gap: 3em;
+    @media screen and (max-width: 920px) {
+        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(17%, 17%));
+        gap: 0;
+    }
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 30% 30% 30%;
+        justify-content: center;
+        align-items: center;
+    }
 }
 .album {
     cursor: pointer;
+    @media screen and (max-width: 1024px) {
+        transform: scale(0.8);
+    }
 }
 
 .player {
@@ -92,14 +123,26 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 55em;
+    min-height: 100%;
     padding-top: 1.5em;
     border-radius: 0 22px 22px 0;
-    max-width: 29.9em;
-    width: 90%;
     padding: 1em 1em;
+    @media screen and (max-width: 768px) {
+        min-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 15em;
+        overflow-y: scroll;
+        background-size: auto;
+        border-radius: 22px;
+    }
 }
-
+#player {
+    @media screen and (max-width: 768px) {
+        margin-top: -3em;
+        margin-left: 4em;
+    }
+}
 #playlist {
     position: relative;
     left: 0.7em;
@@ -253,6 +296,10 @@ ol .playsong-li::marker {
     margin-right: auto;
     max-width: 37em;
     width: 100%;
+    @media screen and (max-width: 768px) {
+        top: 6em;
+        left: 2em;
+    }
 }
 
 .waveform-time {
