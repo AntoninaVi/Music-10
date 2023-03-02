@@ -47,7 +47,7 @@ fetch('albums.json')
       let isPlaying = false;
 
       songs.forEach((song) => {
-        // check if button already exists
+        // check if button exists
         const playButton = song.querySelector(".play-button");
         if (!playButton) {
           // create button if it doesn't exist
@@ -68,6 +68,10 @@ fetch('albums.json')
               pauseSong(player);
             }
           });
+          
+
+
+          
           const songLi = song.closest(".playsong-li");
           songLi.addEventListener("mouseover", () => {
             // show play button on hover

@@ -147,18 +147,15 @@
 
 <script>
     // waveform
-    const playButton = document.getElementById("play-button");
- 
-    playButton.addEventListener('click', function () {
+    document.addEventListener('click', function () {
         const audioContext = new AudioContext();
         audioContext.resume().then(() => {
-
-
             const audio = document.getElementById("music-player");
             const waveform = d3.select("#waveform");
+            const width = +waveform.attr("width");
+            const height = +waveform.attr("height");
             const durationLabel = d3.select("#duration-label");
             const remainingLabel = d3.select("#remaining-label");
-
             let audioSource = null;
 
             if (!audioSource) {
@@ -166,15 +163,14 @@
             }
 
             const analyzer = audioContext.createAnalyser();
-
             audioSource.connect(analyzer);
             analyzer.connect(audioContext.destination);
             const bufferLength = analyzer.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
 
             // D3
-            const xScale = d3.scaleLinear().range([0, waveform.attr("width")]);
-            const yScale = d3.scaleLinear().range([waveform.attr("height"), 0]);
+            const xScale = d3.scaleLinear().range([0, width]);
+            const yScale = d3.scaleLinear().range([height, 0]);
             const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
             const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
             const draw = () => {
@@ -206,10 +202,6 @@
 
             xScale.domain([0, bufferLength]);
             yScale.domain([0, 255]);
-
-            // waveform.style("display", "none");
-            // durationLabel.style("display", "none");
-            // remainingLabel.style("display", "none");
 
             const showWaveform = () => {
                 waveform.style("display", "block");
