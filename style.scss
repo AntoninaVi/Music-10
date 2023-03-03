@@ -23,7 +23,7 @@ body {
     max-width: 1360px;
     width: 100%;
     min-height: 100vh;
-    padding: 0.5em 0.5em;
+    padding: 0.5em 0.2em;
     margin-left: auto;
     margin-right: auto;
     border-radius: 22px;
@@ -34,24 +34,25 @@ body {
     @media screen and (max-width: 1170px) {
         grid-template-columns: 57% 43%;
     }
-    @media screen and (max-width: 1024px) {
-        grid-template-columns: 50% 48%;
+    @media screen and (max-width: 1060px) {
+        grid-template-columns: 46% 54%;
     }
-    @media screen and (max-width: 768px) {
+   
+    @media screen and (max-width: 880px) {
         display: flex;
         flex-direction: column-reverse;
     }
 }
 
-.albums-container {
-    background: #ffffff;
-    border-radius: 22px;
-    max-width: 60rem;
-    width: 100%;
-    border-radius: 22px;
-}
+// .albums-container {
+//     background: #ffffff;
+//     border-radius: 22px;
+//     max-width: 60rem;
+//     width: 100%;
+//     border-radius: 22px;
+// }
 .albums-title {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 880px) {
         display: none;
     }
 }
@@ -61,7 +62,18 @@ body {
         display: flex;
         justify-content: space-between;
         @media screen and (max-width: 1280px) {
-            justify-content: space-evenly;
+            justify-content: center;
+        }
+        @media screen and (max-width: 880px) {
+            margin-bottom: 3em;
+        }
+        @media screen and (max-width: 520px) {
+            margin-left: 4em;
+            margin-bottom: -2em;
+        }
+        @media screen and (max-width: 380px){
+            transform: scale(0.9);
+            margin-left: 7em;
         }
     }
 
@@ -69,27 +81,46 @@ body {
         max-width: 19.5em;
         width: 100%;
     }
+    &__navigation-logo {
+        max-width: 8.3em;
+    }
 }
 #albumList {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10.5em, 12em));
     grid-template-rows: 1fr 1fr 1fr;
-    column-gap: 2em;
-    row-gap: 3em;
+    column-gap: 1.5em;
+    row-gap: 2em;
+    justify-content: center;
+    align-items: center;
     @media screen and (max-width: 920px) {
         grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
         grid-template-rows: repeat(auto-fit, minmax(17%, 17%));
-        gap: 0;
+        column-gap: 0.5em;
+        row-gap: 0.5em;
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 880px) {
+        grid-template-columns: 35% 35% 35%;
+    }
+    @media screen and (max-width: 630px) {
         grid-template-columns: 30% 30% 30%;
-        justify-content: center;
-        align-items: center;
+    }
+    @media screen and (max-width: 520px) {
+        width: 90%;
+        transform: scale(0.9);
+        margin-left: auto;
+    }
+    @media screen and (max-width: 360px) {
+        width:  85%;
+        transform: scale(0.8);
     }
 }
 .album {
     cursor: pointer;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 830px) {
+        transform: scale(0.9);
+    }
+    @media screen and (max-width: 520px) {
         transform: scale(0.8);
     }
 }
@@ -127,21 +158,34 @@ body {
     padding-top: 1.5em;
     border-radius: 0 22px 22px 0;
     padding: 1em 1em;
-    @media screen and (max-width: 768px) {
-        min-width: 90%;
+    @media screen and (max-width: 880px) {
+        width: 90%;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 1em;
         height: 15em;
         overflow-y: scroll;
+        overflow-x: hidden;
         background-size: auto;
         border-radius: 22px;
     }
+    @media screen and (max-width: 520px) {
+        width: 130%;
+    }
+    @media screen and (max-width: 390px) {
+        width: 28em;
+      }
 }
 #player {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 880px) {
         margin-top: -3em;
         margin-left: 4em;
     }
+    @media screen and (max-width: 670px) {
+        margin-left: 0;
+        transform: scale(0.8);
+    }
+    
 }
 #playlist {
     position: relative;
@@ -296,9 +340,13 @@ ol .playsong-li::marker {
     margin-right: auto;
     max-width: 37em;
     width: 100%;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 880px) {
         top: 6em;
         left: 2em;
+    }
+    @media screen and (max-width: 670px) {
+        left: 0;
+        transform: scale(0.8);
     }
 }
 
@@ -407,8 +455,4 @@ ol .playsong-li::marker {
     to {
         height: 18px;
     }
-}
-
-.album-container {
-    transform: scale(0.2);
 }
