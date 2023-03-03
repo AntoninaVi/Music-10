@@ -37,7 +37,7 @@ body {
     @media screen and (max-width: 1060px) {
         grid-template-columns: 46% 54%;
     }
-   
+
     @media screen and (max-width: 880px) {
         display: flex;
         flex-direction: column-reverse;
@@ -71,9 +71,12 @@ body {
             margin-left: 4em;
             margin-bottom: -2em;
         }
-        @media screen and (max-width: 380px){
+        @media screen and (max-width: 380px) {
             transform: scale(0.9);
             margin-left: 7em;
+        }
+        @media screen and (max-width: 360px) {
+            margin-bottom: -6em;
         }
     }
 
@@ -111,7 +114,7 @@ body {
         margin-left: auto;
     }
     @media screen and (max-width: 360px) {
-        width:  85%;
+        width: 85%;
         transform: scale(0.8);
     }
 }
@@ -174,7 +177,7 @@ body {
     }
     @media screen and (max-width: 390px) {
         width: 28em;
-      }
+    }
 }
 #player {
     @media screen and (max-width: 880px) {
@@ -185,7 +188,6 @@ body {
         margin-left: 0;
         transform: scale(0.8);
     }
-    
 }
 #playlist {
     position: relative;

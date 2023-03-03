@@ -111,6 +111,11 @@ body {
     margin-left: 7em;
   }
 }
+@media screen and (max-width: 360px) {
+  .header__navigation {
+    margin-bottom: -6em;
+  }
+}
 .header__navigation-search {
   max-width: 19.5em;
   width: 100%;
