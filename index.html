@@ -242,8 +242,8 @@
     //canvas
     const canvas = document.getElementById("waveform");
     const canvasCtx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 50;
+    // canvas.width = window.innerWidth;
+    // canvas.height = window.innerHeight - 50;
 
     // Drawing waveform
     function drawWaveform() {
@@ -265,21 +265,22 @@
             x += sliceWidth;
         }
         canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.lineWidth = 6;
-		
-			canvasCtx.fillStyle = '#FFD633';
-			canvasCtx.strokeStyle = '#e7bb08';
+        canvasCtx.lineWidth = 2;
+
+        canvasCtx.fillStyle = '#FFD633';
+        canvasCtx.strokeStyle = '#e7bb08';
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
+    //Play-button
     const playBtn = document.getElementById("play-button");
     playBtn.addEventListener("click", () => {
-            if (audioContext.state === "suspended") {
-                audioContext.resume();
-            }
-			document.getElementById("music-player").play();
-			drawWaveform();
-		});
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+        document.getElementById("music-player").play();
+        drawWaveform();
+    });
 
     // Play music and draw waveform
     document.addEventListener('click', function () {
