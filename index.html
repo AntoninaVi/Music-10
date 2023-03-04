@@ -9,14 +9,8 @@
     <link rel="shortcut icon" href="#">
     <script src="https://kit.fontawesome.com/5ac8e979c0.js" crossorigin="anonymous"></script>
 
-    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
-
-    <!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-
-
 </head>
-
 
 <body>
     <div class="wrapper">
@@ -32,9 +26,6 @@
                         </div>
                     </nav>
                 </header>
-
-
-
                 <div class="albums-container-albums" id="albums">
                     <h1 class="albums-title">Original Soundtrack</h1>
 
@@ -102,14 +93,12 @@
                     </div>
                 </div>
                 <div id="search-results"></div>
-
             </section>
 
             <section id="playlistContainer" class="player-container">
                 <button id="play-button" class="play-button"></button>
                 <h3 id="song-title">
                 </h3>
-
                 <div class="waveform-container">
                     <div id="duration-container" class="waveform-time">
                         <span id="duration-label"></span>
@@ -120,8 +109,6 @@
                     </div>
                 </div>
                 <div id="player">
-
-
                     <audio autoplay id="music-player">
                     </audio>
                     <li id="songLi" class="playsong-li">
@@ -135,9 +122,7 @@
                         </div>
                     </li>
                     <div class="playlist" id="playlist">
-
                     </div>
-
                 </div>
             </section>
         </div>
@@ -145,91 +130,10 @@
 
 
     <script src="index.js"></script>
-
 </body>
-
 <script>
     // waveform
-    //     document.addEventListener('click', function() {
-    //     const audioContext = new AudioContext();
-    //     const audio = document.getElementById("music-player");
-    //     const waveform = d3.select("#waveform");
-    //     const width = +waveform.attr("width");
-    //     const height = +waveform.attr("height");
-    //     const durationLabel = d3.select("#duration-label");
-    //     const remainingLabel = d3.select("#remaining-label");
 
-    //     let audioSource = null;
-
-    //     if (!audioSource) {
-    //         audioSource = audioContext.createMediaElementSource(audio);
-    //     }
-
-    //     const analyzer = audioContext.createAnalyser();
-    //     audioSource.connect(analyzer);
-    //     analyzer.connect(audioContext.destination);
-
-    //     const bufferLength = analyzer.frequencyBinCount;
-    //     const dataArray = new Uint8Array(bufferLength);
-
-    //     // D3
-    //     const xScale = d3.scaleLinear().range([0, width]);
-    //     const yScale = d3.scaleLinear().range([height, 0]);
-    //     const line = d3.line().x((d, i) => xScale(i)).y(d => yScale(d));
-    //     const path = waveform.append("path").attr("fill", "yellow").attr("stroke", "orange");
-
-    //     const draw = () => {
-    //         analyzer.getByteTimeDomainData(dataArray);
-    //         path.attr("d", line(dataArray));
-    //         requestAnimationFrame(draw);
-    //     };
-
-    //     audio.onloadedmetadata = () => {
-    //         const duration = Math.floor(audio.duration);
-    //         const remaining = Math.floor(audio.duration);
-    //         durationLabel.text(formatTime(duration));
-    //         remainingLabel.text(formatTime(remaining));
-    //     };
-
-    //     audio.ontimeupdate = () => {
-    //         const duration = Math.floor(audio.duration);
-    //         const remaining = Math.floor(audio.duration - audio.currentTime);
-    //         durationLabel.text(formatTime(duration));
-    //         remainingLabel.text(formatTime(remaining));
-    //     };
-
-    //     function formatTime(seconds) {
-    //         const minutes = Math.floor(seconds / 60);
-    //         const remainingSeconds = seconds - minutes * 60;
-    //         const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-    //         return `${minutes}:${formattedSeconds}`;
-    //     }
-
-    //     xScale.domain([0, bufferLength]);
-    //     yScale.domain([0, 255]);
-
-    //     const showWaveform = () => {
-    //         waveform.style("display", "block");
-    //         durationLabel.style("display", "inline-block");
-    //         remainingLabel.style("display", "inline-block");
-    //     };
-
-    //     const playMusic = () => {
-    //         audio.play();
-    //         draw();
-    //         showWaveform();
-    //     };
-
-    //     audio.addEventListener('canplay', playMusic);
-
-    //     const pauseMusic = () => {
-    //         pauseSong();
-    //     };
-
-    //     document.addEventListener('click', playMusic);
-    //     audio.addEventListener('pause', pauseMusic);
-    //     draw();
-    // });
     // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
@@ -242,8 +146,6 @@
     //canvas
     const canvas = document.getElementById("waveform");
     const canvasCtx = canvas.getContext("2d");
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight - 50;
 
     // Drawing waveform
     function drawWaveform() {
@@ -265,7 +167,7 @@
             x += sliceWidth;
         }
         canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.lineWidth = 2;
+        canvasCtx.lineWidth = 3;
 
         canvasCtx.fillStyle = '#FFD633';
         canvasCtx.strokeStyle = '#e7bb08';
