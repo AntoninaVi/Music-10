@@ -114,7 +114,7 @@
                     <div id="duration-container" class="waveform-time">
                         <span id="duration-label"></span>
                     </div>
-                    <canvas id="waveform"></canvas>
+                    <canvas id="waveform" width="400" height="40"></canvas>
                     <div id="remaining-container" class="waveform-time">
                         <span id="remaining-label"></span>
                     </div>
@@ -265,10 +265,21 @@
             x += sliceWidth;
         }
         canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.strokeStyle = "#FFCD06";
+        canvasCtx.lineWidth = 6;
+		
+			canvasCtx.fillStyle = '#FFD633';
+			canvasCtx.strokeStyle = '#e7bb08';
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
+    const playBtn = document.getElementById("play-button");
+    playBtn.addEventListener("click", () => {
+            if (audioContext.state === "suspended") {
+                audioContext.resume();
+            }
+			document.getElementById("music-player").play();
+			drawWaveform();
+		});
 
     // Play music and draw waveform
     document.addEventListener('click', function () {

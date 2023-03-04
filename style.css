@@ -451,7 +451,7 @@ ol .playsong-li::marker {
       -ms-flex-align: end;
           align-items: end;
   position: relative;
-  top: 10em;
+  top: 11em;
   margin-left: auto;
   margin-right: auto;
   max-width: 37em;
@@ -472,6 +472,8 @@ ol .playsong-li::marker {
 }
 
 .waveform-time {
+  position: relative;
+  top: -3em;
   color: #ffffff;
   opacity: 0.6;
   font-weight: 400;
@@ -481,7 +483,7 @@ ol .playsong-li::marker {
 
 #waveform {
   max-width: 400px;
-  color: #FFCD06;
+  color: #e7bb08;
 }
 
 .album-info {
