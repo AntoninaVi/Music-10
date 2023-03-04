@@ -479,6 +479,11 @@ ol .playsong-li::marker {
   line-height: 12px;
 }
 
+#waveform {
+  max-width: 400px;
+  color: #FFCD06;
+}
+
 .album-info {
   display: -webkit-box;
   display: -ms-flexbox;

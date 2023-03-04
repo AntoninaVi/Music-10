@@ -358,7 +358,10 @@ ol .playsong-li::marker {
     font-size: 12px;
     line-height: 12px;
 }
-
+#waveform{
+    max-width: 400px;
+    color: #FFCD06;
+}
 .album-info {
     display: flex;
     justify-content: flex-start;
@@ -456,3 +459,4 @@ ol .playsong-li::marker {
         height: 18px;
     }
 }
+
