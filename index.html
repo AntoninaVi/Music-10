@@ -133,7 +133,7 @@
 </body>
 <script>
     // waveform
-    document.getElementById('play-button').addEventListener('click', function() {
+    document.addEventListener('click', function() {
     // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
@@ -174,20 +174,35 @@
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
-
-    // Play-button
+    //Play-button
     const playBtn = document.getElementById("play-button");
     playBtn.addEventListener("click", () => {
         if (audioContext.state === "suspended") {
             audioContext.resume().then(() => {
-                audioSource.mediaElement.play();
+                document.getElementById("music-player").play();
                 drawWaveform();
             });
         } else {
-            audioSource.mediaElement.play();
+            document.getElementById("music-player").play();
             drawWaveform();
         }
     });
+
+    // Play music and draw waveform
+    document.addEventListener('click', function () {
+        if (audioContext.state === "suspended") {
+            audioContext.resume().then(() => {
+                document.getElementById("music-player").play();
+                drawWaveform();
+            });
+        } else {
+            document.getElementById("music-player").play();
+            drawWaveform();
+        }
+    });
+    audioSource.mediaElement.addEventListener('canplay', () => {
+    drawWaveform();
+});
 
     // Update duration and remaining time
     const durationLabel = document.getElementById("duration-label");
@@ -206,10 +221,6 @@
     audioSource.mediaElement.addEventListener('loadedmetadata', updateLabels);
     audioSource.mediaElement.addEventListener('timeupdate', updateLabels);
 
-    // Only draw waveform when the media element is playing
-    audioSource.mediaElement.addEventListener('play', () => {
-        drawWaveform();
-    });
 });
 
 </script>
