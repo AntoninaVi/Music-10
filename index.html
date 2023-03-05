@@ -134,7 +134,7 @@
 <script>
     // waveform
 
-    // audio context and source
+    // // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
 
@@ -174,25 +174,21 @@
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
+
     //Play-button
     const playBtn = document.getElementById("play-button");
     playBtn.addEventListener("click", () => {
-        audioContext = new AudioContext();
-        audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
-        analyzer = audioContext.createAnalyser();
-        audioSource.connect(analyzer);
-        analyzer.connect(audioContext.destination);
-
         if (audioContext.state === "suspended") {
             audioContext.resume();
         }
         document.getElementById("music-player").play();
-        drawWaveform();
+        requestAnimationFrame(drawWaveform); // 
     });
-    // Play music and draw waveform
+
+
     document.addEventListener('click', function () {
         document.getElementById("music-player").play();
-        drawWaveform();
+        requestAnimationFrame(drawWaveform); //
     });
 
     // Update duration and remaining time
@@ -211,6 +207,7 @@
     };
     audioSource.mediaElement.addEventListener('loadedmetadata', updateLabels);
     audioSource.mediaElement.addEventListener('timeupdate', updateLabels);
+
 </script>
 </body>
 
