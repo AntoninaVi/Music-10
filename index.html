@@ -174,24 +174,19 @@
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
-    //Play-button
+
+    // Play-button
     const playBtn = document.getElementById("play-button");
     playBtn.addEventListener("click", () => {
         if (audioContext.state === "suspended") {
             audioContext.resume().then(() => {
-                document.getElementById("music-player").play();
+                audioSource.mediaElement.play();
                 drawWaveform();
             });
         } else {
-            document.getElementById("music-player").play();
+            audioSource.mediaElement.play();
             drawWaveform();
         }
-    });
-
-    // Play music and draw waveform
-    document.addEventListener('click', function () {
-        document.getElementById("music-player").play();
-        drawWaveform();
     });
 
     // Update duration and remaining time
@@ -211,6 +206,10 @@
     audioSource.mediaElement.addEventListener('loadedmetadata', updateLabels);
     audioSource.mediaElement.addEventListener('timeupdate', updateLabels);
 
+    // Only draw waveform when the media element is playing
+    audioSource.mediaElement.addEventListener('play', () => {
+        drawWaveform();
+    });
 });
 
 </script>
