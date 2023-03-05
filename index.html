@@ -97,6 +97,7 @@
 
             <section id="playlistContainer" class="player-container">
                 <button id="play-button" class="play-button"></button>
+                
                 <h3 id="song-title">
                 </h3>
                 <div class="waveform-container">
@@ -133,7 +134,7 @@
 </body>
 <script>
     // waveform
-    document.addEventListener('click', function() {
+    document.getElementById('play-button').addEventListener('click', function() {
     // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));

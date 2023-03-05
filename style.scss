@@ -94,13 +94,14 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     column-gap: 1.5em;
     row-gap: 2em;
-    justify-content: center;
-    align-items: center;
+   
     @media screen and (max-width: 920px) {
         grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
         grid-template-rows: repeat(auto-fit, minmax(17%, 17%));
         column-gap: 0.5em;
         row-gap: 0.5em;
+        justify-content: center;
+        align-items: center;
     }
     @media screen and (max-width: 880px) {
         grid-template-columns: 35% 35% 35%;
