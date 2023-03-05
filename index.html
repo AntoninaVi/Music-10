@@ -96,6 +96,7 @@
             </section>
 
             <section id="playlistContainer" class="player-container">
+                <button id="start-button"></button>
                 <button id="play-button" class="play-button"></button>
                 <h3 id="song-title">
                 </h3>
@@ -133,8 +134,8 @@
 </body>
 <script>
     // waveform
-
-    // // audio context and source
+    document.getElementById('play-button').addEventListener('click', function() {
+    // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
 
@@ -167,28 +168,31 @@
             x += sliceWidth;
         }
         canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.lineWidth = 3;
+        canvasCtx.lineWidth = 2;
 
         canvasCtx.fillStyle = '#FFD633';
         canvasCtx.strokeStyle = '#e7bb08';
         canvasCtx.stroke();
         requestAnimationFrame(drawWaveform);
     }
-
     //Play-button
     const playBtn = document.getElementById("play-button");
     playBtn.addEventListener("click", () => {
         if (audioContext.state === "suspended") {
-            audioContext.resume();
+            audioContext.resume().then(() => {
+                document.getElementById("music-player").play();
+                drawWaveform();
+            });
+        } else {
+            document.getElementById("music-player").play();
+            drawWaveform();
         }
-        document.getElementById("music-player").play();
-        requestAnimationFrame(drawWaveform); // 
     });
 
-
+    // Play music and draw waveform
     document.addEventListener('click', function () {
         document.getElementById("music-player").play();
-        requestAnimationFrame(drawWaveform); //
+        drawWaveform();
     });
 
     // Update duration and remaining time
@@ -207,6 +211,8 @@
     };
     audioSource.mediaElement.addEventListener('loadedmetadata', updateLabels);
     audioSource.mediaElement.addEventListener('timeupdate', updateLabels);
+
+});
 
 </script>
 </body>
