@@ -134,7 +134,7 @@
 </body>
 <script>
     // waveform
-    document.getElementById('play-button').addEventListener('click', function() {
+    // document.getElementById('play-button').addEventListener('click', function() {
     // audio context and source
     const audioContext = new AudioContext();
     const audioSource = audioContext.createMediaElementSource(document.getElementById("music-player"));
@@ -222,7 +222,7 @@
     audioSource.mediaElement.addEventListener('loadedmetadata', updateLabels);
     audioSource.mediaElement.addEventListener('timeupdate', updateLabels);
 
-});
+// });
 
 </script>
 </body>
