@@ -313,7 +313,7 @@ ol .playsong-li::marker {
     &:hover {
         background-color: #ffffff;
         border-radius: 6px;
-        transition: ease-in 0.3s;
+        transition: ease-in 0.1s;
     }
 }
 
@@ -410,6 +410,8 @@ ol .playsong-li::marker {
     left: 1%;
     transform: scale(1.3);
     color: #ffcd06;
+    background-color: #ffffff;
+    padding: 2px 3px;
     z-index: 10;
 }
 
