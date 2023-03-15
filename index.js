@@ -27,8 +27,8 @@ fetch('albums.json')
     albumElement.addEventListener("click", () => {
       currentAlbum = albums[index];
       // songTitle.innerHTML = currentAlbum.songs[0].title;
-      player.src = currentAlbum.songs[0].src;
-      player.play();
+      // player.src = currentAlbum.songs[0].src;
+      // player.play();
       displayPlaylist(index);
     });
   });
@@ -38,6 +38,8 @@ fetch('albums.json')
       playlist.style.display = "none";
     });
     const playlist = playlistElements[index];
+
+
     if (!playlist) {
       return;
     }
