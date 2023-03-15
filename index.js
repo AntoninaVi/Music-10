@@ -33,67 +33,124 @@ fetch('albums.json')
     });
   });
 
+  // const displayPlaylist = (index) => {
+  //   playlistElements.forEach((playlist) => {
+  //     playlist.style.display = "none";
+  //   });
+  //   const playlist = playlistElements[index];
+
+
+  //   if (!playlist) {
+  //     return;
+  //   }
+  //   playlist.style.display = "block";
+
+  //   const songs = playlist.querySelectorAll(".playsong-link");
+  //   let isPlaying = false;
+
+  //   songs.forEach((song) => {
+  //     // check if button exists
+  //     const playButton = song.querySelector(".play-button");
+  //     if (!playButton) {
+  //       // create button if it doesn't exist
+  //       const newPlayButton = document.createElement("button");
+  //       newPlayButton.classList.add("play-button");
+  //       newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+  //       song.appendChild(newPlayButton);
+
+  //       newPlayButton.addEventListener("click", () => {
+  //         if (!isPlaying) {
+  //           isPlaying = true;
+  //           newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
+  //           playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
+  //           songLi.appendChild(equalizer);
+  //         } else {
+  //           isPlaying = false;
+  //           newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+  //           pauseSong(player);
+  //         }
+  //       });
+  //       const songLi = song.closest(".playsong-li");
+  //       songLi.addEventListener("mouseover", () => {
+  //         // show play button on hover
+  //         const playButton = songLi.querySelector(".play-button");
+  //         if (playButton) {
+  //           playButton.style.display = "block";
+  //         }
+  //       });
+        
+  //       songLi.addEventListener("mouseleave", () => {
+  //         // hide play button on mouseleave
+  //         const playButton = songLi.querySelector(".play-button");
+  //         if (playButton) {
+  //           playButton.style.display = "none";
+  //         }
+  //       });
+        
+  //     }
+  //   });
+  // };
+
+
   const displayPlaylist = (index) => {
     playlistElements.forEach((playlist) => {
       playlist.style.display = "none";
     });
     const playlist = playlistElements[index];
-
-
+  
     if (!playlist) {
       return;
     }
     playlist.style.display = "block";
-
+  
     const songs = playlist.querySelectorAll(".playsong-link");
     let isPlaying = false;
-
+  
     songs.forEach((song) => {
-      // check if button exists
-      const playButton = song.querySelector(".play-button");
-      if (!playButton) {
-        // create button if it doesn't exist
-        const newPlayButton = document.createElement("button");
-        newPlayButton.classList.add("play-button");
-        newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
-        song.appendChild(newPlayButton);
-
-        newPlayButton.addEventListener("click", () => {
-          if (!isPlaying) {
-            isPlaying = true;
-            newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
-            playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
-            songLi.appendChild(equalizer);
-          } else {
-            isPlaying = false;
-            newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
-            pauseSong(player);
-          }
-        });
-
-
-
-
-        const songLi = song.closest(".playsong-li");
-        songLi.addEventListener("mouseover", () => {
-          // show play button on hover
-          const playButton = songLi.querySelector(".play-button");
-          if (playButton) {
-            playButton.style.display = "block";
-          }
-
-        });
-
-        songLi.addEventListener("mouseleave", () => {
-          // hide play button on mouseleave
-          const playButton = songLi.querySelector(".play-button");
-          if (playButton) {
-            playButton.style.display = "none";
-          }
-        });
-      }
+      const songLi = song.closest(".playsong-li");
+  
+      songLi.addEventListener("mouseover", () => {
+        // check if button exists
+        const playButton = songLi.querySelector(".play-button");
+        if (!playButton) {
+          // create button if it doesn't exist
+          const newPlayButton = document.createElement("button");
+          newPlayButton.classList.add("play-button");
+          newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+          songLi.appendChild(newPlayButton);
+  
+          newPlayButton.addEventListener("click", () => {
+            if (!isPlaying) {
+              isPlaying = true;
+              newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
+              playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
+              songLi.appendChild(equalizer);
+            } else {
+              isPlaying = false;
+              newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+              pauseSong(player);
+            }
+          });
+        }
+  
+        // show play button on hover
+        if (playButton) {
+          playButton.style.display = "block";
+        }
+      });
+  
+      songLi.addEventListener("mouseleave", () => {
+        // hide play button on mouseleave
+        const playButton = songLi.querySelector(".play-button");
+        if (playButton) {
+          playButton.style.display = "none";
+        }
+      });
     });
   };
+  
+
+  
 
   albums.forEach((album, index) => {
     currentAlbum = albums[index];
@@ -120,6 +177,7 @@ fetch('albums.json')
           (song) =>
             `<li id="songLi" class="playsong-li"> 
           <div class="waveform-song" id="waveform-song">
+         
           
       </div>
           <a class="playsong-link" href="#" 

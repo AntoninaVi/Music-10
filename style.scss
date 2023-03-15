@@ -416,12 +416,14 @@ ol .playsong-li::marker {
 }
 
 .play-button {
-    display: block;
+    display: none;
     background: transparent;
     border: none;
     z-index: 10;
 }
-
+.playsong-li:hover .play-button {
+    display: block;
+  }
 // equalizer animation
 #equalizer {
     display: none;
