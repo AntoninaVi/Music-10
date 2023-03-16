@@ -94,7 +94,7 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     column-gap: 1.5em;
     row-gap: 2em;
-   
+
     @media screen and (max-width: 920px) {
         grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
         grid-template-rows: repeat(auto-fit, minmax(17%, 17%));
@@ -238,6 +238,8 @@ h1 {
     line-height: 20px;
     color: #ffffff;
     text-decoration: none;
+    max-width: 200px;
+    width: 100%;
 }
 .playsong-link:hover {
     color: #3a3a3a;
@@ -302,13 +304,14 @@ ol .playsong-li::marker {
 .playsong-li {
     display: grid;
     grid-template-columns: 1em 14em 10em 2em;
-    gap: 8px;
-    align-items: center;
-
+    align-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
     width: 100%;
     cursor: pointer;
     min-height: 3em;
     transform: translate(0);
+    margin-bottom: 8px;
 
     &:hover {
         background-color: #ffffff;
@@ -406,30 +409,29 @@ ol .playsong-li::marker {
 //play-button
 .fas {
     position: absolute;
-    top: 40%;
-    left: 1%;
+    top: 33%;
+    left: 2%;
     transform: scale(1.3);
     color: #ffcd06;
     background-color: #ffffff;
+    font-size: 1.2em;
     padding: 2px 3px;
     z-index: 10;
 }
 
 .play-button {
-    display: none;
+    display: block;
     background: transparent;
     border: none;
     z-index: 10;
 }
-.playsong-li:hover .play-button {
-    display: block;
-  }
+
 // equalizer animation
 #equalizer {
     display: none;
     position: absolute;
-    top: 40%;
-    left: 1%;
+    top: 35%;
+    left: 2%;
     width: 1em;
     height: 1em;
     transform: rotate(180deg);

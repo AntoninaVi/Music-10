@@ -146,6 +146,13 @@ fetch('albums.json')
           playButton.style.display = "none";
         }
       });
+      songLi.addEventListener("touchend", () => {
+        const playButton = songLi.querySelector(".play-button");
+        if (playButton) {
+          playButton.style.display = "none";
+        }
+      });
+      
     });
   };
   
