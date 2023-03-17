@@ -411,8 +411,10 @@ ol .playsong-li::marker {
   grid-template-columns: 1em 14em 10em 2em;
   -ms-flex-line-pack: center;
       align-content: center;
-  padding-left: 1em;
-  padding-right: 1em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.6em 1em;
   width: 100%;
   cursor: pointer;
   min-height: 3em;
