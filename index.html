@@ -28,7 +28,7 @@
                     </nav>
                 </header>
                 <div class="albums-container-albums" id="albums">
-                    <h1 class="albums-title">Original Soundtrack</h1>
+                    <h2 class="album-title">Original Soundtrack</h2>
 
                     <div id="albumList">
                         <div class="album">
@@ -172,12 +172,14 @@
 
     // Update remaining and duration time
     const updateTimer = () => {
+    if (!isNaN(audio.duration) && !isNaN(audio.currentTime)) {
         const remainingTime = audio.duration - audio.currentTime;
         const duration = formatTime(audio.duration);
         const remaining = formatTime(remainingTime);
         d3.select('#remaining-label').text(remaining);
         d3.select('#duration-label').text(duration);
     }
+}
 
     // Format time to mm:ss
     const formatTime = (time) => {
