@@ -478,7 +478,7 @@ ol .playsong-li::marker {
 }
 @media screen and (max-width: 880px) {
   .waveform-container {
-    top: 6em;
+    top: 7em;
     left: 2em;
   }
 }

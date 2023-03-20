@@ -37,6 +37,11 @@ fetch('albums.json')
 
 
     const displayPlaylist = (index) => {
+      const hideAllPauseButtons = () => {
+        const pauseButtons = document.querySelectorAll(".play-button i.fa-pause");
+        pauseButtons.forEach(button => button.parentElement.style.display = "none");
+      };
+      
       playlistElements.forEach((playlist) => {
         playlist.style.display = "none";
       });
@@ -49,6 +54,8 @@ fetch('albums.json')
 
       const songs = playlist.querySelectorAll(".playsong-link");
       let isPlaying = false;
+    
+
 
       songs.forEach((song) => {
         const songLi = song.closest(".playsong-li");
@@ -63,7 +70,24 @@ fetch('albums.json')
             newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
             songLi.appendChild(newPlayButton);
 
+            // newPlayButton.addEventListener("click", () => {
+              
+            //   if (!isPlaying) {
+            //     isPlaying = true;
+            //     newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
+            //     playSong(song.dataset.songTitle, song.dataset.songSrc, playlist);
+            //     songLi.appendChild(equalizer);
+                
+            //   } else {
+            //     isPlaying = false;
+            //     newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+            //     pauseSong(player);
+            //   }
+              
+            // });
+           
             newPlayButton.addEventListener("click", () => {
+              let prevPauseButton;
               if (!isPlaying) {
                 isPlaying = true;
                 newPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
@@ -74,13 +98,19 @@ fetch('albums.json')
                 newPlayButton.innerHTML = '<i class="fas fa-play"></i>';
                 pauseSong(player);
               }
+              if (prevPauseButton) {
+                prevPauseButton.style.display = "none";
+              }
+              prevPauseButton = newPlayButton;
             });
+            
           }
 
           // show play button on hover
           if (playButton) {
             playButton.style.display = "block";
           }
+          
         });
 
         songLi.addEventListener("mouseleave", () => {
