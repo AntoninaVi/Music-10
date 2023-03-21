@@ -164,6 +164,7 @@ fetch('albums.json')
 
 
     const searchAlbum = () => {
+      
       const searchValue = searchInput.value.toLowerCase();
       const filteredAlbums = albums.filter(album =>
         album.artist.toLowerCase().includes(searchValue) ||
@@ -215,18 +216,35 @@ fetch('albums.json')
       });
     };
 
-    searchInput.addEventListener("input", () => {
-      const filter = searchInput.value.toLowerCase();
-      const albumElements = document.querySelectorAll(".album");
-      albumElements.forEach((albumElement) => {
-        const albumTitle = albumElement.textContent.toLowerCase();
-        if (albumTitle.includes(filter)) {
-          albumElement.style.display = "block";
+    //without enter clicking
+    // searchInput.addEventListener("input", () => {
+    //   const filter = searchInput.value.toLowerCase();
+    //   const albumElements = document.querySelectorAll(".album");
+    //   albumElements.forEach((albumElement) => {
+    //     const albumTitle = albumElement.textContent.toLowerCase();
+    //     if (albumTitle.includes(filter)) {
+    //       albumElement.style.display = "block";
+    //     } else {
+    //       albumElement.style.display = "none";
+    //     }
+    //   });
+    // });
+
+    //enter click
+    searchInput.addEventListener("keypress", (event) => {
+      if (event.keyCode === 13) { // Enter key pressed
+        if (searchInput.value.trim() === '') {
+          const albumElements = document.querySelectorAll(".album");
+          albumElements.forEach((albumElement) => {
+            albumElement.style.display = "block";
+          });
         } else {
-          albumElement.style.display = "none";
+          filterAlbums(searchInput.value);
         }
-      });
+      }
     });
+    
+    
 
   });
 

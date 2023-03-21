@@ -150,6 +150,7 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    min-height: 150vh;
   }
 }
 @media screen and (max-width: 880px) {
@@ -430,6 +431,7 @@ ol .playsong-li::marker {
     display: block;
     padding-left: 2em;
     margin-left: 1em;
+    margin-bottom: 1em;
     -webkit-transform: scale(1.3);
             transform: scale(1.3);
     width: 80%;
@@ -480,6 +482,11 @@ ol .playsong-li::marker {
     left: 0;
     -webkit-transform: scale(0.8);
             transform: scale(0.8);
+  }
+}
+@media screen and (max-width: 540px) {
+  .waveform-container {
+    top: 10em;
   }
 }
 
@@ -586,6 +593,11 @@ ol .playsong-li::marker {
 @media screen and (max-width: 912px) {
   #equalizer {
     left: -4%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #equalizer {
+    left: -8%;
   }
 }
 
