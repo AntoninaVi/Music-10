@@ -76,7 +76,6 @@ body {
     &__navigation-search {
         max-width: 19.5em;
         width: 100%;
-      
     }
     &__navigation-logo {
         max-width: 8.3em;
@@ -89,7 +88,6 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     column-gap: 1.5em;
     row-gap: 2em;
-   
 
     @media screen and (max-width: 920px) {
         grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
@@ -232,10 +230,22 @@ h1 {
     text-decoration: none;
     max-width: 200px;
     width: 100%;
+    
+    // &::before {
+    //     content: " ";
+    //     display: list-item;
+    //     position: relative;
+    //     right: 0.4em;
+    //     top: 2.8vh;
+    //     font-size: 12px;
+    //     line-height: 12px;
+    //     color: rgb(151, 147, 147);
+    // }
 }
 .playsong-link:hover {
     color: #3a3a3a;
 }
+
 .playsong-link:focus {
     background-repeat: no-repeat;
     background-position: left center;
@@ -244,6 +254,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: left center;
 }
+
 input {
     padding: 0.5em 0em 0.5em 2.5em;
     background: #ffffff;
@@ -274,10 +285,11 @@ input {
 .ol-playlist {
     margin-top: 6em;
     margin-left: -1.4em;
+   
 }
 @media screen and(max-width:1280px) {
     .ol-playlist {
-     margin-left: 0.3em;
+        margin-left: 0.3em;
     }
 }
 @media screen and(max-width:912px) {
@@ -289,16 +301,6 @@ input {
     .ol-playlist {
         margin-top: 4em;
     }
-}
-
-ol .playsong-li::marker {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 12px;
-    color: #ea1313;
-    opacity: 0.4;
-    margin-left: 2em;
 }
 
 .playsong-artist {
@@ -342,13 +344,16 @@ ol .playsong-li::marker {
 .playsong-li:hover .playsong-link {
     color: #3a3a3a;
 }
-.playsong-li:hover0 .playsong-artist {
+.playsong-li:hover .playsong-artist {
     color: #3a3a3a;
     opacity: 0.6;
 }
 .playsong-li:hover .playsong-duration {
     color: #3a3a3a;
     opacity: 0.6;
+}
+.playsong-li:hover .playsong-link::before {
+    display: none;
 }
 .playsong-duration {
     color: #ffffff;
@@ -373,7 +378,7 @@ ol .playsong-li::marker {
         transform: scale(0.8);
     }
     @media screen and (max-width: 540px) {
-      top: 10em;
+        top: 10em;
     }
 }
 #waveform {

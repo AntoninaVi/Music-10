@@ -381,16 +381,6 @@ input {
     margin-top: 4em;
   }
 }
-ol .playsong-li::marker {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  color: #ea1313;
-  opacity: 0.4;
-  margin-left: 2em;
-}
-
 .playsong-artist {
   font-weight: 400;
   font-size: 14px;
@@ -447,7 +437,7 @@ ol .playsong-li::marker {
   color: #3a3a3a;
 }
 
-.playsong-li:hover0 .playsong-artist {
+.playsong-li:hover .playsong-artist {
   color: #3a3a3a;
   opacity: 0.6;
 }
@@ -455,6 +445,10 @@ ol .playsong-li::marker {
 .playsong-li:hover .playsong-duration {
   color: #3a3a3a;
   opacity: 0.6;
+}
+
+.playsong-li:hover .playsong-link::before {
+  display: none;
 }
 
 .playsong-duration {
