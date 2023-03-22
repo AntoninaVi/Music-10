@@ -35,7 +35,7 @@ body {
         grid-template-columns: 57% 43%;
     }
     @media screen and (max-width: 1100px) {
-        grid-template-columns: 46% 54%;
+        grid-template-columns: 46% 50%;
     }
 
     @media screen and (max-width: 880px) {
@@ -275,6 +275,11 @@ input {
     margin-top: 6em;
     margin-left: -1.4em;
 }
+@media screen and(max-width:1280px) {
+    .ol-playlist {
+     margin-left: 0.3em;
+    }
+}
 @media screen and(max-width:912px) {
     .ol-playlist {
         margin-left: 3em;
@@ -435,7 +440,6 @@ ol .playsong-li::marker {
     padding: 2px 3px;
     z-index: 10;
     @media screen and(max-width:1280px) {
-        left: 8%;
         background-color: transparent;
     }
     @media screen and(max-width:912px) {
@@ -461,11 +465,14 @@ ol .playsong-li::marker {
     height: 1em;
     transform: rotate(180deg);
     z-index: 1;
-    @media screen and(max-width:912px) {
+    @media screen and(max-width:1280px) {
         left: -4%;
     }
     @media screen and(max-width:600px) {
         left: -8%;
+    }
+    @media screen and(max-width:390px) {
+        left: -10%;
     }
 }
 

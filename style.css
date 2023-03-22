@@ -53,8 +53,8 @@ body {
 }
 @media screen and (max-width: 1100px) {
   .container {
-    -ms-grid-columns: 46% 54%;
-    grid-template-columns: 46% 54%;
+    -ms-grid-columns: 46% 50%;
+    grid-template-columns: 46% 50%;
   }
 }
 @media screen and (max-width: 880px) {
@@ -366,6 +366,11 @@ input {
   margin-left: -1.4em;
 }
 
+@media screen and (max-width: 1280px) {
+  .ol-playlist {
+    margin-left: 0.3em;
+  }
+}
 @media screen and (max-width: 912px) {
   .ol-playlist {
     margin-left: 3em;
@@ -561,7 +566,6 @@ ol .playsong-li::marker {
 }
 @media screen and (max-width: 1280px) {
   .fas {
-    left: 8%;
     background-color: transparent;
   }
 }
@@ -590,7 +594,7 @@ ol .playsong-li::marker {
           transform: rotate(180deg);
   z-index: 1;
 }
-@media screen and (max-width: 912px) {
+@media screen and (max-width: 1280px) {
   #equalizer {
     left: -4%;
   }
@@ -598,6 +602,11 @@ ol .playsong-li::marker {
 @media screen and (max-width: 600px) {
   #equalizer {
     left: -8%;
+  }
+}
+@media screen and (max-width: 390px) {
+  #equalizer {
+    left: -10%;
   }
 }
 
